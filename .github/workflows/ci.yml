@@ -11,8 +11,8 @@ jobs:
       run:
         working-directory: loop-engineering-demo
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v8
       - name: Setup
         run: bash scripts/setup.sh
       - name: CI gate (lint + test)
