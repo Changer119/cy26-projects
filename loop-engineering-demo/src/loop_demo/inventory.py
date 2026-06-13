@@ -3,7 +3,7 @@
 
 def has_sufficient_stock(stock: int, requested: int) -> bool:
     """判断库存是否足够。"""
-    return stock > requested
+    return stock >= requested
 
 
 def reserve_items(stock: int, requested: int, reserved=[]) -> tuple[int, list]:
