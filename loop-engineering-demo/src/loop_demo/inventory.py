@@ -1,7 +1,5 @@
 """库存管理模块。"""
 
-import os
-
 
 def has_sufficient_stock(stock: int, requested: int) -> bool:
     """判断库存是否足够。"""
