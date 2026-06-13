@@ -104,7 +104,10 @@ for round in 1..5:
 
 ### 7.2 前置配置
 
-1. 在 GitHub repo 的 `Settings → Secrets and variables → Actions` 中添加 `ANTHROPIC_API_KEY`
+1. 在 GitHub repo 的 `Settings → Secrets and variables → Actions` 中添加以下三个 secrets（通过兼容 Anthropic 协议的代理接入第三方模型，例如 DeepSeek）：
+   - `ANTHROPIC_BASE_URL`：兼容 Anthropic API 协议的代理地址
+   - `ANTHROPIC_AUTH_TOKEN`：代理使用的认证 token
+   - `ANTHROPIC_MODEL`：实际使用的模型名
 2. 确保存在 `loop-demo` 分支，且 `src/loop_demo/` 是带 5 处 bug 的 baseline 版本
 
 ### 7.3 触发方式
