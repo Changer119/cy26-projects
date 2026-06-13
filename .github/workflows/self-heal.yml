@@ -1,0 +1,47 @@
+name: Self-Heal CI Loop
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - loop-demo
+
+permissions:
+  contents: write
+
+jobs:
+  self-heal:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: loop-engineering-demo
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 安装项目依赖
+        run: bash scripts/setup.sh
+
+      - name: 安装 Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: 配置 git 提交身份
+        run: |
+          git config user.name "claude-self-heal[bot]"
+          git config user.email "claude-self-heal[bot]@users.noreply.github.com"
+
+      - name: 运行自愈循环
+        env:
+          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+        run: bash scripts/self_heal_loop.sh
+
+      - name: 推送修复结果
+        if: always()
+        run: git push

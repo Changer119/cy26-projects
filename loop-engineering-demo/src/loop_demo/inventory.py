@@ -8,9 +8,9 @@ def has_sufficient_stock(stock: int, requested: int) -> bool:
 
 def reserve_items(stock: int, requested: int, reserved=None) -> tuple[int, list]:
     """从库存中预留商品，返回剩余库存和本次预留记录列表。"""
-    if reserved is None:
-        reserved = []
     if not has_sufficient_stock(stock, requested):
         raise ValueError("库存不足")
+    if reserved is None:
+        reserved = []
     reserved.append(requested)
     return stock - requested, reserved
