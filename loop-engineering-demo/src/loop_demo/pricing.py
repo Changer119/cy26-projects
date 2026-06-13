@@ -3,12 +3,12 @@
 
 def apply_discount(price: float, discount_rate: float) -> float:
     """根据折扣率计算折后价格。"""
-    return price - price * discount_rate
+    return price + price * discount_rate
 
 
 def calculate_tax(price: float, tax_rate: float = 0.1) -> float:
     """计算含税价格。"""
-    return round(price * (1 + tax_rate), 2)
+    return round(price * (1 - tax_rate), 2)
 
 
 def calculate_total(price: float, discount_rate: float, tax_rate: float = 0.1) -> float:
