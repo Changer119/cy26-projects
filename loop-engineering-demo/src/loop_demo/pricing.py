@@ -3,7 +3,7 @@
 
 def apply_discount(price: float, discount_rate: float) -> float:
     """根据折扣率计算折后价格。"""
-    return price + price * discount_rate
+    return price - price * discount_rate
 
 
 def calculate_tax(price: float, tax_rate: float = 0.1) -> float:
