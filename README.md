@@ -3,9 +3,9 @@
 这个仓库演示如何用 GitHub Actions 定时更新 README。
 
 <!-- AUTO_UPDATE_START -->
-- 最近更新时间：2026-06-13 15:39:21 UTC
+- 最近更新时间：2026-06-13 15:43:04 UTC
 - 由 GitHub Actions 定时更新，也可以通过 `workflow_dispatch` 手动触发。
-- 当前仓库：`local/demo`
+- 当前仓库：`Changer119/cy26-projects`
 <!-- AUTO_UPDATE_END -->
 
 ## 本地运行
