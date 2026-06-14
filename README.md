@@ -1,6 +1,9 @@
 # cy26-projects
 
-这个仓库演示如何用 GitHub Actions 定时更新 README。
+这个仓库演示两个 GitHub Actions 入门例子：
+
+- 定时更新 README
+- push 后自动跑测试
 
 <!-- AUTO_UPDATE_START -->
 - 最近更新时间：2026-06-14 04:05:12 UTC
@@ -13,3 +16,8 @@
 ```bash
 ./06-github-action-demo/scripts/test.sh
 ```
+
+## GitHub Actions 示例
+
+- [定时更新 README](./.github/workflows/update-readme.yml)
+- [push 后自动跑测试](./.github/workflows/test-on-push.yml)
