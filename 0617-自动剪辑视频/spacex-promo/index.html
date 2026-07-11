@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/visuals.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="30"
+      data-width="1080"
+      data-height="1920"
+    >
+      <audio
+        id="soundtrack"
+        class="clip"
+        data-start="0"
+        data-duration="30"
+        data-track-index="9"
+        data-volume="0.82"
+        src="./assets/pulse.wav"
+      ></audio>
+
+      <div class="global-grid" data-layout-ignore></div>
+      <div class="scan-band" data-layout-ignore></div>
+
+      <section id="scene1" class="scene scene-opening">
+        <div class="scene-content">
+          <p class="eyebrow">ORBITAL SYSTEMS / 2002-2026</p>
+          <h1>SPACEX</h1>
+          <p class="lead">把通往轨道的门，重新做成可复用的交通系统。</p>
+          <div class="mission-strip">
+            <span>LAUNCH</span><span>LAND</span><span>REFLY</span>
+          </div>
+          <div class="visual launch-visual" aria-hidden="true">
+            <div class="rocket-shell"><span></span></div>
+            <svg viewBox="0 0 760 760">
+              <path class="draw orbit-a" pathLength="1" d="M80 440 C210 80 560 40 690 260" />
+              <path class="draw orbit-b" pathLength="1" d="M120 610 C360 500 500 180 650 120" />
+              <circle class="node hot" cx="620" cy="165" r="10" />
+              <circle class="node cool" cx="185" cy="535" r="8" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene2" class="scene">
+        <div class="scene-content split">
+          <p class="eyebrow">NODE 01 / FALCON 1</p>
+          <h2><span class="year">2008</span>首次入轨</h2>
+          <p class="lead">三次失败之后，Falcon 1 成为首个进入地球轨道的私营液体燃料火箭。</p>
+          <div class="data-stack">
+            <span>ATTEMPT 04</span><strong>ORBIT ACHIEVED</strong>
+          </div>
+          <div class="visual telemetry" aria-hidden="true">
+            <svg viewBox="0 0 680 680">
+              <path class="draw axis" pathLength="1" d="M84 560 H620" />
+              <path class="draw axis" pathLength="1" d="M120 592 V108" />
+              <path class="draw flame-line" pathLength="1" d="M132 545 C230 420 278 470 350 340 C420 210 475 260 590 118" />
+              <circle class="node hot" cx="590" cy="118" r="12" />
+              <circle class="node cool" cx="350" cy="340" r="9" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene3" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">NODE 02 / DRAGON</p>
+          <h2><span class="year">2012</span>连上空间站</h2>
+          <p class="lead">Dragon 开始为 ISS 执行商业补给，商业航天从“能飞”进入“能服务”。</p>
+          <div class="dock-map" aria-hidden="true">
+            <div class="station"></div>
+            <div class="capsule"></div>
+            <svg viewBox="0 0 800 520">
+              <path class="draw dock-line" pathLength="1" d="M130 365 C290 120 520 120 665 250" />
+              <circle class="node cool" cx="665" cy="250" r="10" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene4" class="scene">
+        <div class="scene-content split">
+          <p class="eyebrow">NODE 03 / REUSABILITY</p>
+          <h2><span class="year">2015-2018</span>复用成为系统</h2>
+          <p class="lead">Falcon 9 完成轨道级火箭回收；Falcon Heavy 首飞，把“回收”变成规模化能力。</p>
+          <div class="mission-strip wide">
+            <span>LANDING ZONE 1</span><span>FALCON HEAVY</span>
+          </div>
+          <div class="visual landing-visual" aria-hidden="true">
+            <div class="landing-pad"></div>
+            <div class="booster"></div>
+            <svg viewBox="0 0 650 720">
+              <path class="draw descent" pathLength="1" d="M505 70 C410 190 482 330 330 430 C250 482 245 575 326 626" />
+              <circle class="node hot" cx="505" cy="70" r="10" />
+              <circle class="node cool" cx="326" cy="626" r="12" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene5" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">NODE 04 / ACCESS TO ORBIT</p>
+          <h2><span class="year">2019-2021</span>轨道服务扩张</h2>
+          <p class="lead">Starlink 扩展低轨网络；Crew Dragon 让美国载人航天重回本土发射；Inspiration4 打开民间轨道飞行想象。</p>
+          <div class="constellation" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+            <svg viewBox="0 0 820 500">
+              <path class="draw net" pathLength="1" d="M110 270 L240 160 L405 230 L560 120 L710 250" />
+              <path class="draw net" pathLength="1" d="M160 380 L310 300 L455 370 L650 315" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene6" class="scene">
+        <div class="scene-content final">
+          <p class="eyebrow">NODE 05 / STARSHIP</p>
+          <h2><span class="year">2024-2026</span>全复用冲刺</h2>
+          <p class="lead">Mechazilla 捕获 Super Heavy；V3、Raptor 3 与 Pad 2 继续把 Starship 推向月球、火星与更远处。</p>
+          <div class="catch-frame" aria-hidden="true">
+            <div class="tower"></div>
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+            <div class="starship"></div>
+          </div>
+          <strong class="tagline">MAKE LIFE MULTIPLANETARY</strong>
+        </div>
+      </section>
+
+      <div class="wipe" data-layout-ignore></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const root = document.querySelector("#root");
+      const wipe = document.querySelector(".wipe");
+      const scenes = ["#scene1", "#scene2", "#scene3", "#scene4", "#scene5", "#scene6"];
+      for (let i = 0; i < 27; i += 1) {
+        const cell = document.createElement("span");
+        cell.className = "wipe-cell";
+        wipe.appendChild(cell);
+      }
+      const cells = gsap.utils.toArray(".wipe-cell");
+      const tl = gsap.timeline({
+        paused: true,
+        defaults: { duration: 0.48, ease: "power2.out", overwrite: "auto" },
+      });
+      function transition(fromScene, toScene, at, color) {
+        tl.set(toScene, { opacity: 0, zIndex: 3 }, at);
+        tl.set(cells, {
+          opacity: 1,
+          scaleY: 0,
+          transformOrigin: "top",
+          backgroundColor: color,
+          overwrite: "auto",
+        }, at);
+        tl.to(cells, {
+          scaleY: 1,
+          duration: 0.18,
+          ease: "power4.inOut",
+          stagger: { each: 0.008, from: "start" },
+          overwrite: "auto",
+        }, at);
+        tl.set(fromScene, { opacity: 0, zIndex: 1, overwrite: "auto" }, at + 0.27);
+        tl.set(toScene, { opacity: 1, zIndex: 3, overwrite: "auto" }, at + 0.27);
+        tl.to(cells, {
+          scaleY: 0,
+          transformOrigin: "bottom",
+          duration: 0.2,
+          ease: "expo.inOut",
+          stagger: { each: 0.006, from: "end" },
+          overwrite: "auto",
+        }, at + 0.28);
+        tl.set(toScene, { zIndex: 2, overwrite: "auto" }, at + 0.6);
+      }
+      function enterScene(scene, at, mode) {
+        fromIfExists(`${scene} .eyebrow`, {
+          x: mode === "left" ? -84 : 62,
+          opacity: 0,
+          duration: 0.36,
+          ease: "expo.out",
+          overwrite: "auto",
+        }, at + 0.18);
+        fromIfExists(`${scene} h1, ${scene} h2`, {
+          y: mode === "rise" ? 76 : -42,
+          scale: mode === "scale" ? 0.88 : 1,
+          opacity: 0,
+          duration: 0.62,
+          ease: "back.out(1.45)",
+          overwrite: "auto",
+        }, at + 0.32);
+        fromIfExists(`${scene} .lead`, {
+          x: mode === "left" ? 64 : -54,
+          opacity: 0,
+          duration: 0.52,
+          ease: "power3.out",
+          overwrite: "auto",
+        }, at + 0.56);
+        fromIfExists(`${scene} .mission-strip span, ${scene} .data-stack`, {
+          y: 34,
+          opacity: 0,
+          duration: 0.34,
+          ease: "circ.out",
+          stagger: 0.07,
+          overwrite: "auto",
+        }, at + 0.78);
+        fromIfExists(`${scene} .visual, ${scene} .dock-map, ${scene} .constellation, ${scene} .catch-frame`, {
+          scale: 0.94,
+          opacity: 0,
+          duration: 0.74,
+          ease: "sine.out",
+          overwrite: "auto",
+        }, at + 0.42);
+        fromIfExists(`${scene} .draw`, {
+          strokeDashoffset: 1,
+          duration: 0.86,
+          ease: "power1.out",
+          stagger: 0.08,
+          overwrite: "auto",
+        }, at + 0.68);
+      }
+      function fromIfExists(selector, vars, at) {
+        if (document.querySelector(selector)) {
+          tl.from(selector, vars, at);
+        }
+      }
+      function ambient(scene, at, duration, selector, vars) {
+        tl.to(`${scene} ${selector}`, {
+          ...vars,
+          duration,
+          ease: "sine.inOut",
+          overwrite: "auto",
+        }, at);
+      }
+      gsap.set(scenes.slice(1), { opacity: 0, zIndex: 1 });
+      gsap.set("#scene1", { opacity: 1, zIndex: 2 });
+      gsap.set(cells, { scaleY: 0, opacity: 0 });
+      enterScene("#scene1", 0, "rise");
+      ambient("#scene1", 0.8, 3.4, ".rocket-shell", { y: -46, x: 20 });
+      ambient("#scene1", 0.4, 4.0, "svg", { rotation: 3, transformOrigin: "50% 50%" });
+      transition("#scene1", "#scene2", 4.35, "#44D7FF");
+      enterScene("#scene2", 4.55, "left");
+      ambient("#scene2", 5.1, 3.3, ".telemetry svg", { x: 26, y: -18 });
+
+      transition("#scene2", "#scene3", 9.05, "#FF6B2B");
+      enterScene("#scene3", 9.25, "scale");
+      ambient("#scene3", 9.95, 3.2, ".capsule", { x: 94, y: -62 });
+      ambient("#scene3", 10.1, 3.1, ".station", { x: -18 });
+
+      transition("#scene3", "#scene4", 13.85, "#9AF27A");
+      enterScene("#scene4", 14.05, "rise");
+      ambient("#scene4", 14.9, 3.2, ".booster", { y: 64 });
+      ambient("#scene4", 15.1, 2.7, ".landing-pad", { scaleX: 1.12, transformOrigin: "50% 50%" });
+
+      transition("#scene4", "#scene5", 18.65, "#44D7FF");
+      enterScene("#scene5", 18.85, "left");
+      ambient("#scene5", 19.6, 3.6, ".constellation span", {
+        y: -18,
+        stagger: { each: 0.12, from: "start" },
+      });
+
+      transition("#scene5", "#scene6", 23.45, "#FF6B2B");
+      enterScene("#scene6", 23.65, "scale");
+      tl.from("#scene6 .tagline", {
+        y: 48,
+        opacity: 0,
+        duration: 0.62,
+        ease: "expo.out",
+        overwrite: "auto",
+      }, 25.2);
+      ambient("#scene6", 24.3, 3.4, ".starship", { y: 78 });
+      ambient("#scene6", 24.6, 2.4, ".arm.left", { rotation: 1 });
+      ambient("#scene6", 24.6, 2.4, ".arm.right", { rotation: -1 });
+
+      tl.to("#scene6 .scene-content", {
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.in",
+        overwrite: "auto",
+      }, 29.1);
+      tl.to(root, { backgroundColor: "#000000", duration: 0.6, ease: "sine.inOut", overwrite: "auto" }, 29.25);
+
+      window.__timelines.main = tl;
+    </script>
+  </body>
+</html>

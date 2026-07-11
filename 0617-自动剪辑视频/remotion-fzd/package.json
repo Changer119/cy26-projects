@@ -1,0 +1,25 @@
+{
+  "name": "fan-zhendong-koubo-video",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts FanzhendongKoubo ../outputs/fanzhendong/fanzhendong-koubo.mp4 --codec=h264 --pixel-format=yuv420p",
+    "still": "remotion still src/index.ts FanzhendongKoubo ../outputs/fanzhendong/fanzhendong-frame-120.png --frame=120"
+  },
+  "dependencies": {
+    "@remotion/captions": "latest",
+    "@remotion/cli": "latest",
+    "@remotion/media": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "remotion": "latest",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        margin: 0;
+        overflow: hidden;
+        background: #f5f6f2;
+      }
+
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% 57%, rgba(174, 184, 174, 0.42) 0 25%, transparent 44%),
+          linear-gradient(180deg, #fbfbf8 0%, #f5f6f2 54%, #ecece7 100%);
+      }
+
+      .scene-content {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .product-stage {
+        position: relative;
+        width: 1080px;
+        height: 1260px;
+        perspective: 1600px;
+        transform-style: preserve-3d;
+      }
+
+      .ambient-ring,
+      .floor-shadow,
+      .slot-glow {
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .ambient-ring {
+        left: 95px;
+        top: 368px;
+        width: 890px;
+        height: 890px;
+        border-radius: 50%;
+        background: rgba(192, 204, 192, 0.38);
+        filter: blur(1px);
+      }
+
+      .floor-shadow {
+        left: 145px;
+        top: 1058px;
+        width: 790px;
+        height: 110px;
+        border-radius: 50%;
+        background: rgba(53, 45, 35, 0.18);
+        filter: blur(28px);
+        transform: scaleX(0.92);
+      }
+
+      .box {
+        position: absolute;
+        left: 50px;
+        top: 710px;
+        width: 980px;
+        height: 464px;
+        transform-style: preserve-3d;
+      }
+
+      .box-layer,
+      .glasses {
+        position: absolute;
+        transform-style: preserve-3d;
+        will-change: transform, opacity, filter;
+      }
+
+      .box-layer {
+        inset: 0;
+        overflow: hidden;
+        background-image: url("./assets/AI眼镜盒.png");
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-size: 980px auto;
+      }
+
+      .back-cavity {
+        z-index: 1;
+        clip-path: inset(0 0 50% 0);
+        opacity: 0.72;
+        filter: saturate(0.92) brightness(0.96);
+        transform: translateY(34px) scaleY(0.68);
+        transform-origin: 50% 88%;
+      }
+
+      .inner-shadow {
+        position: absolute;
+        left: 82px;
+        top: 112px;
+        z-index: 2;
+        width: 816px;
+        height: 180px;
+        border-radius: 48% 48% 18% 18%;
+        background: linear-gradient(180deg, rgba(85, 76, 64, 0.28), rgba(30, 28, 24, 0.08));
+        filter: blur(14px);
+        opacity: 0;
+        transform: scaleX(0.9);
+      }
+
+      .glasses {
+        left: 62px;
+        top: -360px;
+        z-index: 4;
+        width: 856px;
+        opacity: 0;
+        transform: translate3d(-34px, -250px, 260px) scale(1.03);
+      }
+
+      .glasses img {
+        width: 100%;
+        display: block;
+        filter: drop-shadow(0 24px 26px rgba(24, 26, 25, 0.28));
+        mix-blend-mode: multiply;
+      }
+
+      .front-base {
+        z-index: 5;
+        clip-path: inset(40% 0 0 0);
+        filter: saturate(0.96) contrast(1.02);
+      }
+
+      .lid {
+        z-index: 8;
+        clip-path: inset(0 0 25% 0);
+        transform-origin: 50% 72%;
+        transform: translate3d(0, 0, 0) rotateX(0deg);
+        filter: saturate(1.02) contrast(1.03) drop-shadow(0 12px 14px rgba(81, 62, 42, 0.16));
+      }
+
+      .slot-glow {
+        left: 407px;
+        top: 1023px;
+        z-index: 10;
+        width: 266px;
+        height: 26px;
+        border-radius: 999px;
+        background: #7df0a0;
+        opacity: 0;
+        filter: blur(8px);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="5"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div class="scene-content">
+        <div class="product-stage" aria-hidden="true">
+          <div class="ambient-ring" data-layout-ignore></div>
+          <div class="floor-shadow" data-layout-ignore></div>
+          <div class="box">
+            <div id="backCavity" class="box-layer back-cavity">
+            </div>
+            <div id="innerShadow" class="inner-shadow" data-layout-ignore></div>
+            <div id="glasses" class="glasses">
+              <img src="./assets/AI眼镜.png" alt="" />
+            </div>
+            <div id="frontBase" class="box-layer front-base">
+            </div>
+            <div id="lid" class="box-layer lid">
+            </div>
+          </div>
+          <div id="slotGlow" class="slot-glow" data-layout-ignore></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      tl.from(".product-stage", { y: 44, opacity: 0, duration: 0.42, ease: "power3.out" }, 0.12);
+      tl.from(".floor-shadow", { scaleX: 0.72, opacity: 0, duration: 0.5, ease: "sine.out" }, 0.18);
+      tl.from(".ambient-ring", { scale: 0.88, opacity: 0, duration: 0.56, ease: "expo.out" }, 0.22);
+
+      tl.to("#lid", {
+        rotationX: -68,
+        y: -112,
+        scaleY: 0.76,
+        duration: 1.05,
+        ease: "power4.inOut",
+      }, 0.42);
+      tl.to("#backCavity", { opacity: 0.98, y: 4, scaleY: 0.82, duration: 0.85, ease: "power2.out" }, 0.58);
+      tl.to("#innerShadow", { opacity: 0.62, scaleX: 1, duration: 0.72, ease: "sine.out" }, 0.72);
+
+      tl.to("#glasses", { opacity: 1, duration: 0.34, ease: "sine.out" }, 1.18);
+      tl.to("#glasses", {
+        x: 0,
+        y: 425,
+        z: 0,
+        scale: 0.7,
+        duration: 1.18,
+        ease: "power3.inOut",
+      }, 1.22);
+      tl.to("#glasses", { y: 454, scale: 0.66, duration: 0.48, ease: "back.out(1.4)" }, 2.46);
+      tl.to(".floor-shadow", { scaleX: 0.76, opacity: 0.82, duration: 0.6, ease: "sine.inOut" }, 2.32);
+
+      tl.to("#lid", {
+        rotationX: 0,
+        y: 0,
+        scaleY: 1,
+        duration: 1.15,
+        ease: "power3.inOut",
+      }, 3.05);
+      tl.to("#innerShadow", { opacity: 0.08, scaleX: 0.88, duration: 0.9, ease: "sine.in" }, 3.1);
+      tl.to("#glasses", { opacity: 0.34, filter: "blur(0.5px)", duration: 0.7, ease: "sine.in" }, 3.38);
+      tl.to("#slotGlow", { opacity: 0.8, duration: 0.26, ease: "sine.out" }, 4.16);
+      tl.to("#slotGlow", { opacity: 0.16, duration: 0.58, ease: "sine.inOut" }, 4.42);
+
+      window.__timelines.main = tl;
+    </script>
+  </body>
+</html>

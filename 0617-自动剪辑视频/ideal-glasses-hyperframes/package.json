@@ -1,0 +1,11 @@
+{
+  "name": "ideal-glasses-hyperframes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "npx --yes hyperframes@0.6.110 lint --verbose",
+    "validate": "npx --yes hyperframes@0.6.110 validate",
+    "inspect": "npx --yes hyperframes@0.6.110 inspect --samples 12",
+    "render": "npx --yes hyperframes@0.6.110 render"
+  }
+}

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="./assets/gsap.min.js"></script>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/scenes.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="62"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div class="global-grid" data-layout-ignore></div>
+      <div class="glow-a" data-layout-ignore></div>
+      <div class="glow-b" data-layout-ignore></div>
+
+      <section id="scene1" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">ARTICLE TO DEMO / 2026-07-06</p>
+          <div class="row">
+            <div>
+              <h1>别急着逼 Agent 干活</h1>
+              <p class="lead">Karpathy 的判断更像一张路线图：先理解底层模型，再谈可靠代理。</p>
+              <p class="source-pill">新智元 · Karpathy最新开喷</p>
+            </div>
+            <figure class="cover-shot">
+              <img src="./assets/article-cover.jpg" alt="文章封面" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene2" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">LESSON 01 / WORLD OF BITS</p>
+          <h2>2016 年，Agent 已经失败过一次</h2>
+          <div class="timeline">
+            <div class="time-node"><strong>2016</strong><p>World of Bits 想让 Agent 操作网页、订票、点餐。</p></div>
+            <div class="time-node"><strong>RL</strong><p>当时主要工具是强化学习，模型能力还没准备好。</p></div>
+            <div class="time-node"><strong>2026</strong><p>今天的工具箱换了，但“别跳过地基”仍然成立。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene3" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">LESSON 02 / TEN-YEAR PRODUCT</p>
+          <h2>Demo 很容易，产品要花十年</h2>
+          <div class="compare">
+            <article class="principle"><span class="mono">AUTO DRIVING</span><h3>绕街区一圈不是产品</h3><p>自动驾驶的难点不在 Demo，而在长尾场景、可靠性和系统工程。</p></article>
+            <article class="principle"><span class="mono">AGENT</span><h3>炫酷演示也不是护城河</h3><p>真正难的是稳定完成任务、可恢复、可评估、可持续改进。</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene4" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">LESSON 03 / FOUNDATION FIRST</p>
+          <div class="row">
+            <div>
+              <h2>Agent 不是产品，基础能力才是产品</h2>
+              <p class="lead">把地基打牢，Agent 会自然涌现；地基不牢，外壳越快越脆。</p>
+            </div>
+            <figure class="article-shot tall">
+              <img src="./assets/karpathy-quote.png" alt="Karpathy 文章截图" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene5" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">FRONTIER / BUILDERS AT THE EDGE</p>
+          <h2>真正的前沿，也许在一线开发者手里</h2>
+          <div class="frontier">
+            <article class="principle"><span class="mono">BIG LABS</span><h3>模型训练深水区</h3><p>大厂在 Transformer 训练和规模化经验上积累极深。</p></article>
+            <article class="principle"><span class="mono">BUILDERS</span><h3 class="green">Agent 新大陆</h3><p>没有人有五年先发优势，创业者和黑客仍能撞出新东西。</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene6" class="scene">
+        <div class="scene-content">
+          <p class="eyebrow">TAKEAWAY / ROUTE MAP</p>
+          <h2>这不是“别做 Agent”，而是别跳过基础去做 Agent</h2>
+          <div class="route">
+            <div class="route-step"><strong>01</strong><p>先把模型能力、任务边界和评估方式吃透。</p></div>
+            <div class="route-step"><strong>02</strong><p>从真实闭环开始，而不是从万能助手口号开始。</p></div>
+            <div class="route-step"><strong>03</strong><p>准备做十年，别把一场 Demo 误认为终局。</p></div>
+          </div>
+          <p class="footer-note">Source: mp.weixin.qq.com/s/NTwunYHLz8naycDBhFYYKA</p>
+        </div>
+      </section>
+
+      <div class="wipe" data-layout-ignore></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true, defaults: { overwrite: "auto" } });
+      const scenes = ["#scene1", "#scene2", "#scene3", "#scene4", "#scene5", "#scene6"];
+      const starts = [0, 9.4, 19.1, 29.2, 40.0, 50.3];
+      const colors = ["#ff7a3d", "#78e0a1", "#d9ded5", "#ff7a3d", "#78e0a1"];
+      const wipe = document.querySelector(".wipe");
+
+      for (let i = 0; i < 24; i += 1) {
+        const cell = document.createElement("span");
+        cell.className = "wipe-cell";
+        wipe.appendChild(cell);
+      }
+
+      const cells = gsap.utils.toArray(".wipe-cell");
+
+      function fromIfExists(selector, vars, at) {
+        if (document.querySelectorAll(selector).length > 0) {
+          tl.from(selector, vars, at);
+        }
+      }
+
+      function enter(scene, at, mode) {
+        fromIfExists(`${scene} .eyebrow`, { x: mode === "right" ? 76 : -76, opacity: 0, duration: 0.46, ease: "expo.out" }, at + 0.18);
+        fromIfExists(`${scene} h1, ${scene} h2`, { y: mode === "drop" ? -58 : 70, scale: mode === "scale" ? 0.9 : 1, opacity: 0, duration: 0.72, ease: "back.out(1.35)" }, at + 0.34);
+        fromIfExists(`${scene} .lead`, { y: 44, opacity: 0, duration: 0.58, ease: "power3.out" }, at + 0.62);
+        fromIfExists(`${scene} .small, ${scene} .source-pill, ${scene} .footer-note`, { x: mode === "right" ? -48 : 48, opacity: 0, duration: 0.46, ease: "circ.out", stagger: 0.08 }, at + 0.84);
+        fromIfExists(`${scene} .quote-wall span, ${scene} .time-node, ${scene} .principle, ${scene} .brain-map div, ${scene} .route-step`, { y: 46, opacity: 0, duration: 0.5, ease: "power2.out", stagger: 0.09 }, at + 1.0);
+        fromIfExists(`${scene} .cover-shot, ${scene} .article-shot`, { scale: 0.94, rotation: mode === "right" ? 2 : -2, opacity: 0, duration: 0.72, ease: "sine.out" }, at + 0.72);
+      }
+
+      function transition(fromScene, toScene, at, color) {
+        tl.set(toScene, { opacity: 0, zIndex: 3 }, at);
+        tl.set(cells, { backgroundColor: color, scaleY: 0, transformOrigin: "top" }, at);
+        tl.to(cells, { scaleY: 1, duration: 0.24, ease: "power4.inOut", stagger: { each: 0.007, from: "start" } }, at);
+        tl.set(fromScene, { opacity: 0, zIndex: 1 }, at + 0.34);
+        tl.set(toScene, { opacity: 1, zIndex: 3 }, at + 0.34);
+        tl.to(cells, { scaleY: 0, transformOrigin: "bottom", duration: 0.25, ease: "expo.inOut", stagger: { each: 0.006, from: "end" } }, at + 0.36);
+        tl.set(toScene, { zIndex: 2 }, at + 0.72);
+      }
+
+      tl.from(".global-grid", { opacity: 0, duration: 0.5, ease: "sine.out" }, 0.12);
+      tl.from(".glow-a", { scale: 0.72, opacity: 0, duration: 0.78, ease: "power2.out" }, 0.22);
+      tl.from(".glow-b", { scale: 0.82, opacity: 0, duration: 0.7, ease: "circ.out" }, 0.3);
+      tl.to(".glow-a", { scale: 1.05, duration: 8, ease: "sine.inOut", repeat: 7, yoyo: true }, 1.1);
+      tl.to(".glow-b", { x: 42, y: -26, duration: 7, ease: "sine.inOut", repeat: 8, yoyo: true }, 1.05);
+
+      enter("#scene1", starts[0], "scale");
+      enter("#scene2", starts[1], "right");
+      enter("#scene3", starts[2], "drop");
+      enter("#scene4", starts[3], "left");
+      enter("#scene5", starts[4], "scale");
+      enter("#scene6", starts[5], "right");
+
+      for (let i = 0; i < scenes.length - 1; i += 1) {
+        transition(scenes[i], scenes[i + 1], starts[i + 1] - 0.72, colors[i]);
+      }
+
+      tl.to("#scene6 .scene-content", { opacity: 0, y: -24, duration: 0.8, ease: "sine.in" }, 61.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

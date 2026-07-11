@@ -1,0 +1,37 @@
+[
+  {
+    "text": "巴黎之后，樊振东给人的感觉不是更吵，",
+    "startMs": 0,
+    "endMs": 2300,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "而是 *更稳*。",
+    "startMs": 2300,
+    "endMs": 3800,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "顶级运动员，赢在技术，",
+    "startMs": 3800,
+    "endMs": 5900,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "也赢在关键分里那一下不乱。",
+    "startMs": 5900,
+    "endMs": 8200,
+    "timestampMs": null,
+    "confidence": null
+  },
+  {
+    "text": "记住两个字：*沉住*。",
+    "startMs": 8200,
+    "endMs": 10000,
+    "timestampMs": null,
+    "confidence": null
+  }
+]
