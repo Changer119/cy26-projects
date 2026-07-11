@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台风巴威 · 实时监测大屏</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
+  <link rel="stylesheet" href="/static/css/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">🌀</span>
+      <h1 id="title">台风「巴威」实时监测大屏</h1>
+      <span class="badge badge-id" id="tfid-badge">--</span>
+      <span class="badge badge-live" id="active-badge">--</span>
+    </div>
+    <div class="topbar-right">
+      <div class="clock" id="clock">--:--:--</div>
+      <div class="update-info">
+        <span>数据更新：<b id="fetched-at">--</b></span>
+        <span class="countdown">下次刷新 <b id="countdown">--</b> 秒</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel panel-left">
+      <section class="card">
+        <h2>实况信息 <small id="latest-time">--</small></h2>
+        <div class="strength-row">
+          <span class="strength-tag" id="strong-tag">--</span>
+          <span class="power-big" id="power">--</span><span class="power-unit">级</span>
+        </div>
+        <div class="kv-grid" id="live-grid"></div>
+        <p class="position-text" id="ck-position">--</p>
+      </section>
+      <section class="card">
+        <h2>风圈半径 <small>公里 · 东北/东南/西南/西北</small></h2>
+        <div id="wind-circles"></div>
+      </section>
+      <section class="card">
+        <h2>趋势研判</h2>
+        <p class="summary-text" id="summary">--</p>
+      </section>
+    </aside>
+
+    <section class="map-wrap">
+      <div id="map"></div>
+      <div class="map-legend" id="legend"></div>
+    </section>
+
+    <aside class="panel panel-right">
+      <section class="card">
+        <h2>中央气象台 · 预报路径</h2>
+        <div class="table-wrap">
+          <table id="forecast-table">
+            <thead><tr><th>时间</th><th>强度</th><th>风力</th><th>气压</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card">
+        <h2>距沿海城市距离</h2>
+        <ul class="city-list" id="city-list"></ul>
+      </section>
+      <section class="card">
+        <h2>台风档案</h2>
+        <div class="kv-grid" id="meta-grid"></div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="bottombar">
+    <span id="source">数据来源：--</span>
+    <span id="status-text">系统状态：初始化中…</span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+  <script src="/static/js/map.js"></script>
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
