@@ -1,0 +1,2128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="8～10 人技术团队 AI 人才转型与能力建设机制">
+  <title>让专业深度成为团队的复利｜AI 技术团队转型机制</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500;600;700;900&amp;family=Source+Serif+4:ital,wght@0,500;0,600;1,600&amp;display=swap" rel="stylesheet">
+  <style>
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+
+    /* 1. Lock the browser viewport */
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--stage-bg, #000);
+    }
+
+    /* 2. Full-window deck viewport */
+    .deck-viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background: var(--stage-bg, #000);
+    }
+
+    /* 3. Fixed 16:9 design canvas.
+       JavaScript sets transform: translate(...) scale(...). */
+    .deck-stage {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      transform-origin: 0 0;
+      background: var(--slide-bg, #fff);
+    }
+
+    /* 4. Slides stack inside the fixed stage.
+       Content must be laid out at 1920×1080, not reflowed per device. */
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      display: block;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      background: var(--slide-bg, #fff);
+    }
+
+    .slide.active,
+    .slide.visible {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    /* 5. Keep media inside authored slide bounds */
+    img,
+    video,
+    canvas,
+    svg {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    /* 6. Presentation chrome stays outside the slide design system */
+    .deck-controls {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+
+    /* 7. Print one fixed-size slide per page */
+    @media print {
+      html,
+      body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+      }
+
+      .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+      }
+
+      .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+      }
+
+      .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+      }
+
+      .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .deck-controls {
+        display: none !important;
+      }
+    }
+
+    /* 8. Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+      }
+    }
+
+    /* ===========================================
+       SIGNAL DESIGN TOKENS
+       =========================================== */
+    :root {
+      --stage-bg: #10172a;
+      --slide-bg: #1c2644;
+      --navy: #1c2644;
+      --navy-alt: #232f55;
+      --cream: #f0ece3;
+      --cream-alt: #e6e0d4;
+      --warm: #e2dcd0;
+      --muted-dark: #8a96a8;
+      --hint-dark: #4e5a6e;
+      --ink: #1a2030;
+      --muted-light: #5a6270;
+      --hint-light: #9aa0a8;
+      --gold: #c8a870;
+      --border-dark: #2e3d5c;
+      --border-light: #cac4b4;
+      --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "DM Sans", "Noto Sans SC", sans-serif;
+      color: var(--warm);
+    }
+
+    /* ===========================================
+       SURFACES AND EDITORIAL FRAME
+       =========================================== */
+    .slide.dark {
+      color: var(--warm);
+      background: var(--navy);
+    }
+
+    .slide.light {
+      color: var(--ink);
+      background: var(--cream);
+    }
+
+    .slide.dark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    .slide-shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      padding: 56px 112px 48px;
+      display: grid;
+      grid-template-rows: 52px minmax(0, 1fr) 40px;
+      gap: 20px;
+    }
+
+    .slide-main {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .chrome,
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+    }
+
+    .dark .chrome,
+    .dark .foot {
+      color: var(--muted-dark);
+    }
+
+    .light .chrome,
+    .light .foot {
+      color: var(--muted-light);
+    }
+
+    .chrome {
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 16px;
+    }
+
+    .light .chrome {
+      border-color: var(--border-light);
+    }
+
+    .foot {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 15px;
+    }
+
+    .light .foot {
+      border-color: var(--border-light);
+    }
+
+    .kicker {
+      color: var(--gold);
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      margin: 0 0 14px;
+    }
+
+    .gold-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .slide-title {
+      margin: 0;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 58px;
+      line-height: 1.18;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .slide-title em,
+    .cover-title em,
+    .statement em {
+      color: var(--gold);
+      font-style: normal;
+      font-weight: inherit;
+    }
+
+    .lead {
+      margin: 14px 0 0;
+      max-width: 1380px;
+      font-size: 25px;
+      line-height: 1.65;
+    }
+
+    .dark .lead,
+    .dark .muted {
+      color: var(--muted-dark);
+    }
+
+    .light .lead,
+    .light .muted {
+      color: var(--muted-light);
+    }
+
+    .section-head {
+      margin-bottom: 28px;
+    }
+
+    .section-head.compact {
+      margin-bottom: 18px;
+    }
+
+    .panel {
+      border-top: 1px solid var(--border-dark);
+      padding: 20px 18px 14px 0;
+      min-width: 0;
+    }
+
+    .light .panel {
+      border-color: var(--border-light);
+    }
+
+    .panel.gold-top {
+      border-top: 2px solid var(--gold);
+    }
+
+    .panel h3,
+    .panel h4 {
+      margin: 0;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .panel h3 {
+      font-size: 31px;
+    }
+
+    .panel h4 {
+      font-size: 25px;
+    }
+
+    .panel p {
+      margin: 10px 0 0;
+      font-size: 21px;
+      line-height: 1.62;
+    }
+
+    .meta-label {
+      color: var(--gold);
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+
+    .number {
+      color: var(--gold);
+      font-family: "Source Serif 4", serif;
+      font-size: 54px;
+      line-height: 1;
+      font-weight: 600;
+    }
+
+    .dash-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 9px;
+    }
+
+    .dash-list li {
+      position: relative;
+      padding-left: 30px;
+      font-size: 21px;
+      line-height: 1.5;
+    }
+
+    .dash-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold);
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 13px;
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ===========================================
+       REUSABLE LAYOUTS
+       =========================================== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 34px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 26px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .hairline-box {
+      border: 1px solid var(--border-dark);
+      padding: 22px;
+    }
+
+    .light .hairline-box {
+      border-color: var(--border-light);
+    }
+
+    .gold-note {
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+    }
+
+    .arrow {
+      color: var(--hint-dark);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 26px;
+      align-self: center;
+    }
+
+    .light .arrow {
+      color: var(--hint-light);
+    }
+
+    /* ===========================================
+       SLIDE 01 — COVER
+       =========================================== */
+    .cover {
+      padding: 72px 90px 64px;
+      display: grid;
+      grid-template-rows: 82px 1fr 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-top,
+    .cover-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--gold);
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 18px;
+      color: var(--muted-dark);
+      letter-spacing: 0.1em;
+    }
+
+    .cover-top {
+      border-bottom: 1px solid var(--border-dark);
+      border-top: 0;
+    }
+
+    .cover-bottom {
+      border-color: var(--border-dark);
+      padding-top: 20px;
+    }
+
+    .cover-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .cover-kicker {
+      color: var(--gold);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      margin-bottom: 28px;
+    }
+
+    .cover-title {
+      margin: 0;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 116px;
+      line-height: 1.14;
+      font-weight: 700;
+    }
+
+    .cover-subtitle {
+      width: 1040px;
+      margin: 34px 0 0;
+      color: var(--muted-dark);
+      font-size: 27px;
+      line-height: 1.65;
+    }
+
+    .cover-index {
+      border-top: 1px solid var(--gold);
+    }
+
+    .cover-index div {
+      height: 126px;
+      border-bottom: 1px solid var(--border-dark);
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cover-index b {
+      color: var(--gold);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    .cover-index span {
+      font-size: 24px;
+    }
+
+    /* ===========================================
+       SLIDE-SPECIFIC DATA VISUALS
+       =========================================== */
+    .problem-grid {
+      height: 650px;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 54px;
+    }
+
+    .failure-list {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .failure {
+      border-bottom: 1px solid var(--border-dark);
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .failure h3 {
+      margin: 0 0 7px;
+      font-size: 30px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+    }
+
+    .failure p {
+      margin: 0;
+      color: var(--muted-dark);
+      font-size: 21px;
+      line-height: 1.55;
+    }
+
+    .outcome-box {
+      border-left: 1px solid var(--border-dark);
+      padding-left: 54px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .statement {
+      margin: 18px 0 36px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 58px;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .mechanism-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      height: 390px;
+    }
+
+    .mechanism-card {
+      border-top: 2px solid var(--gold);
+      padding: 24px 26px 20px 0;
+    }
+
+    .mechanism-card .number {
+      font-size: 46px;
+      margin-bottom: 18px;
+    }
+
+    .mechanism-card h3 {
+      margin: 0 0 12px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 36px;
+    }
+
+    .mechanism-card p {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.6;
+      color: var(--muted-light);
+    }
+
+    .flywheel {
+      margin-top: 34px;
+      height: 128px;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: repeat(9, auto);
+      align-items: center;
+      justify-content: space-between;
+      font-size: 23px;
+    }
+
+    .flywheel strong {
+      font-weight: 600;
+    }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(2, 220px);
+      gap: 20px 26px;
+    }
+
+    .domain {
+      border-top: 1px solid var(--border-dark);
+      padding: 20px 14px 12px 0;
+    }
+
+    .domain .meta-label {
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .domain h3 {
+      margin: 0 0 10px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .domain p {
+      margin: 0;
+      color: var(--muted-dark);
+      font-size: 19px;
+      line-height: 1.52;
+    }
+
+    .extension-strip {
+      margin-top: 22px;
+      border-top: 1px solid var(--gold);
+      padding-top: 17px;
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .extension-strip p {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .owner-loop {
+      display: grid;
+      grid-template-columns: repeat(9, auto);
+      align-items: stretch;
+      height: 235px;
+      margin-top: 24px;
+    }
+
+    .owner-step {
+      width: 248px;
+      border-top: 2px solid var(--gold);
+      padding: 20px 16px 10px 0;
+    }
+
+    .owner-step h3 {
+      margin: 9px 0;
+      font-size: 31px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+    }
+
+    .owner-step p {
+      margin: 0;
+      color: var(--muted-light);
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .deliverables {
+      margin-top: 38px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 20px;
+    }
+
+    .deliverables h3 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .deliverable-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 22px;
+    }
+
+    .deliverable {
+      border-left: 1px solid var(--border-light);
+      padding-left: 18px;
+      font-size: 21px;
+      line-height: 1.45;
+    }
+
+    .cognition-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 178px);
+      gap: 20px 24px;
+    }
+
+    .cognition {
+      border-top: 1px solid var(--border-dark);
+      padding: 17px 14px 8px 0;
+    }
+
+    .cognition h3 {
+      margin: 0 0 8px;
+      font-size: 25px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+    }
+
+    .cognition p {
+      margin: 0;
+      color: var(--muted-dark);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .diagnostic {
+      margin-top: 28px;
+      height: 114px;
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--border-dark);
+      display: grid;
+      grid-template-columns: 220px repeat(11, auto);
+      align-items: center;
+      justify-content: space-between;
+      font-size: 21px;
+    }
+
+    .diagnostic strong {
+      color: var(--gold);
+      font-size: 22px;
+    }
+
+    .stack {
+      display: grid;
+      grid-template-rows: 98px 356px 102px;
+      gap: 22px;
+    }
+
+    .stack-row {
+      display: grid;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .stack-row.apps,
+    .stack-row.sources {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stack-row.foundation {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    .stack-cell {
+      border: 1px solid var(--border-light);
+      padding: 16px 18px;
+      min-width: 0;
+    }
+
+    .stack-cell.core {
+      border-top: 2px solid var(--gold);
+    }
+
+    .stack-cell h3 {
+      margin: 0 0 7px;
+      font-size: 22px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+    }
+
+    .stack-cell p {
+      margin: 0;
+      color: var(--muted-light);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .stack-label {
+      position: absolute;
+      writing-mode: vertical-rl;
+      transform: translateX(-54px);
+      color: var(--gold);
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+    }
+
+    .dod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 142px);
+      gap: 16px 24px;
+    }
+
+    .dod-item {
+      border-top: 1px solid var(--border-dark);
+      padding: 16px 14px 8px 0;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 15px;
+    }
+
+    .dod-item b {
+      color: var(--gold);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 17px;
+    }
+
+    .dod-item h3 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+    }
+
+    .dod-item p {
+      margin: 0;
+      color: var(--muted-dark);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .graduation {
+      margin-top: 24px;
+      border-left: 3px solid var(--gold);
+      padding: 12px 0 12px 22px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .graduation p {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.55;
+    }
+
+    .score-layout {
+      display: grid;
+      grid-template-columns: 0.58fr 0.42fr;
+      gap: 54px;
+      height: 610px;
+    }
+
+    .score-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 70px;
+      gap: 18px;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .score-track {
+      height: 11px;
+      background: var(--border-light);
+    }
+
+    .score-fill {
+      height: 100%;
+      background: var(--gold);
+    }
+
+    .score-value {
+      color: var(--gold);
+      font-family: "Source Serif 4", serif;
+      font-size: 27px;
+      text-align: right;
+    }
+
+    .entry-gate {
+      border-left: 1px solid var(--border-light);
+      padding-left: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .entry-gate h3 {
+      margin: 10px 0 18px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 38px;
+      line-height: 1.35;
+    }
+
+    .project-matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 218px);
+      gap: 22px 28px;
+    }
+
+    .project {
+      border-top: 1px solid var(--border-dark);
+      padding: 18px 14px 10px 0;
+    }
+
+    .project h3 {
+      margin: 0 0 10px;
+      font-size: 27px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+    }
+
+    .project p {
+      margin: 0 0 12px;
+      color: var(--muted-dark);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .project .domains {
+      color: var(--gold);
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .squad-layout {
+      display: grid;
+      grid-template-columns: 0.48fr 0.52fr;
+      gap: 48px;
+      height: 590px;
+    }
+
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .role {
+      border-top: 2px solid var(--gold);
+      padding: 18px 14px 8px 0;
+    }
+
+    .role h3 {
+      margin: 8px 0;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 27px;
+    }
+
+    .role p {
+      margin: 0;
+      color: var(--muted-light);
+      font-size: 18px;
+      line-height: 1.52;
+    }
+
+    .six-week {
+      border-left: 1px solid var(--border-light);
+      padding-left: 42px;
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+    }
+
+    .week {
+      border-bottom: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: 130px 1fr 130px;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .week .number {
+      font-size: 42px;
+      white-space: nowrap;
+    }
+
+    .week h3 {
+      margin: 0 0 5px;
+      font-size: 24px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+    }
+
+    .week p {
+      margin: 0;
+      color: var(--muted-light);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .week .gate {
+      color: var(--gold);
+      font-size: 17px;
+      text-align: right;
+    }
+
+    .assistant-flow {
+      display: grid;
+      grid-template-columns: 0.72fr 42px 1.1fr 42px 1fr 42px 1.18fr 42px 0.92fr;
+      align-items: stretch;
+      height: 220px;
+      margin-top: 28px;
+    }
+
+    .flow-node {
+      border-top: 2px solid var(--gold);
+      padding: 18px 12px 8px 0;
+    }
+
+    .flow-node h3 {
+      margin: 7px 0;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    .flow-node p {
+      margin: 0;
+      color: var(--muted-dark);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .metric-strip {
+      margin-top: 34px;
+      border-top: 1px solid var(--border-dark);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .metric {
+      min-height: 150px;
+      padding: 22px 18px 8px 0;
+      border-right: 1px solid var(--border-dark);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+      padding-left: 18px;
+    }
+
+    .metric .number {
+      font-size: 39px;
+    }
+
+    .metric p {
+      margin: 8px 0 0;
+      font-size: 18px;
+      color: var(--muted-dark);
+      line-height: 1.45;
+    }
+
+    .cadence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      height: 250px;
+    }
+
+    .cadence {
+      border-top: 2px solid var(--gold);
+      padding: 20px 14px 8px 0;
+    }
+
+    .cadence h3 {
+      margin: 7px 0 10px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 32px;
+    }
+
+    .cadence p {
+      margin: 0;
+      color: var(--muted-light);
+      font-size: 20px;
+      line-height: 1.55;
+    }
+
+    .deep-dive {
+      margin-top: 38px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 20px;
+      display: grid;
+      grid-template-columns: 190px repeat(6, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .deep-step {
+      border-left: 1px solid var(--border-light);
+      padding-left: 14px;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .measure-layout {
+      display: grid;
+      grid-template-columns: 0.44fr 0.56fr;
+      gap: 54px;
+      height: 570px;
+    }
+
+    .vanity,
+    .outcomes {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 20px;
+    }
+
+    .vanity h3,
+    .outcomes h3 {
+      margin: 0 0 14px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 31px;
+    }
+
+    .milestone {
+      margin-top: 24px;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 17px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .milestone div {
+      border-left: 1px solid var(--border-dark);
+      padding-left: 13px;
+    }
+
+    .milestone b {
+      color: var(--gold);
+      font-family: "Source Serif 4", serif;
+      font-size: 32px;
+      display: block;
+    }
+
+    .milestone span {
+      font-size: 16px;
+      color: var(--muted-dark);
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 380px;
+      margin-top: 28px;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .roadmap-stage {
+      padding: 24px 24px 14px 0;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .roadmap-stage + .roadmap-stage {
+      padding-left: 24px;
+    }
+
+    .roadmap-stage:last-child {
+      border-right: 0;
+    }
+
+    .roadmap-stage h3 {
+      margin: 10px 0;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 28px;
+    }
+
+    .roadmap-stage p {
+      margin: 0 0 12px;
+      color: var(--muted-light);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 155px);
+      gap: 20px 24px;
+    }
+
+    .risk {
+      border-top: 1px solid var(--border-dark);
+      padding: 17px 14px 8px 0;
+    }
+
+    .risk h3 {
+      margin: 0 0 8px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 23px;
+    }
+
+    .risk p {
+      margin: 0;
+      color: var(--muted-dark);
+      font-size: 17px;
+      line-height: 1.46;
+    }
+
+    .closing-question {
+      margin-top: 26px;
+      border-left: 3px solid var(--gold);
+      padding: 9px 0 9px 24px;
+      font-family: "Source Serif 4", "Noto Sans SC", sans-serif;
+      font-size: 30px;
+      line-height: 1.45;
+    }
+
+    /* ===========================================
+       ANIMATIONS
+       =========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.48s var(--ease-editorial),
+        transform 0.48s var(--ease-editorial);
+    }
+
+    .slide.visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.visible .reveal:nth-child(2) {
+      transition-delay: 0.06s;
+    }
+
+    .slide.visible .reveal:nth-child(3) {
+      transition-delay: 0.12s;
+    }
+
+    .slide.visible .reveal:nth-child(4) {
+      transition-delay: 0.18s;
+    }
+
+    /* ===========================================
+       SCREEN CONTROLS AND INLINE EDITOR
+       =========================================== */
+    .deck-controls {
+      min-width: 240px;
+      height: 40px;
+      padding: 0 15px;
+      border: 1px solid rgba(240, 236, 227, 0.2);
+      background: rgba(16, 23, 42, 0.92);
+      color: var(--warm);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    body:hover .deck-controls,
+    .deck-controls:focus-within {
+      opacity: 1;
+    }
+
+    .progress-track {
+      width: 130px;
+      height: 2px;
+      background: var(--border-dark);
+    }
+
+    .progress-fill {
+      width: 6.25%;
+      height: 100%;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .edit-hotzone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: pointer;
+    }
+
+    .edit-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10001;
+      height: 38px;
+      padding: 0 13px;
+      border: 1px solid var(--gold);
+      background: var(--navy);
+      color: var(--gold);
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .edit-toggle.show,
+    .edit-toggle.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .edit-status {
+      position: fixed;
+      top: 19px;
+      left: 156px;
+      z-index: 10001;
+      color: var(--gold);
+      font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .edit-status.show {
+      opacity: 1;
+    }
+
+    [contenteditable="true"] {
+      outline: 1px dashed rgba(200, 168, 112, 0.62);
+      outline-offset: 4px;
+      cursor: text;
+    }
+
+    @media print {
+      .edit-hotzone,
+      .edit-toggle,
+      .edit-status {
+        display: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage" aria-live="polite">
+
+      <!-- 01｜封面 -->
+      <section class="slide dark active visible" aria-label="第 1 页：让专业深度成为团队的复利">
+        <div class="cover">
+          <header class="cover-top">
+            <span>技术团队 AI 人才转型机制</span>
+            <span>内部研讨 · 2026</span>
+            <span>NO. 01</span>
+          </header>
+          <div class="cover-body">
+            <div>
+              <div class="cover-kicker reveal">ORGANIZATIONAL CAPABILITY BRIEFING</div>
+              <h1 class="cover-title reveal" data-editable>让专业深度<br>成为团队的<em>复利</em></h1>
+              <p class="cover-subtitle reveal" data-editable>面向 8～10 人技术团队，用纵向领域深耕与横向项目协作，建立可持续增长的 AI 工程能力。</p>
+            </div>
+            <aside class="cover-index reveal">
+              <div><b>01</b><span data-editable>领域 Owner</span></div>
+              <div><b>02</b><span data-editable>共同技术底座</span></div>
+              <div><b>03</b><span data-editable>跨领域项目</span></div>
+            </aside>
+          </div>
+          <footer class="cover-bottom">
+            <span>RESEARCH → PROJECT → ASSET → FOUNDATION</span>
+            <span>01 / 16</span>
+          </footer>
+        </div>
+      </section>
+
+      <!-- 02｜为什么分工仍然不够 -->
+      <section class="slide dark" aria-label="第 2 页：问题不是会不会用 AI，而是能力能否复利">
+        <div class="slide-shell">
+          <header class="chrome"><span>01 / 问题定义</span><span>02 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">WHY THE OBVIOUS PLAN FAILS</p>
+              <h2 class="slide-title" data-editable>问题不是会不会用 AI，<em>而是能力能否复利</em></h2>
+            </div>
+            <div class="problem-grid">
+              <div class="failure-list reveal">
+                <div class="failure">
+                  <span class="number">01</span>
+                  <div><h3 data-editable>同质化学习</h3><p data-editable>人人知道一点热门工具，却没有人能对关键技术判断负责。</p></div>
+                </div>
+                <div class="failure">
+                  <span class="number">02</span>
+                  <div><h3 data-editable>领域孤岛</h3><p data-editable>Owner 变成唯一执行者，知识没有进入团队和项目。</p></div>
+                </div>
+                <div class="failure">
+                  <span class="number">03</span>
+                  <div><h3 data-editable>一次性项目</h3><p data-editable>每个 Demo 都从零搭建，没有评测、复用和长期维护。</p></div>
+                </div>
+              </div>
+              <div class="outcome-box reveal">
+                <span class="tag">真正目标</span>
+                <p class="statement" data-editable>把个人知识<br>转化为团队的<em>工程资产</em></p>
+                <ul class="dash-list">
+                  <li data-editable>纵向上培养可以负责的专家</li>
+                  <li data-editable>横向上建立共同语言与复用底座</li>
+                  <li data-editable>用真实项目检验质量、成本与风险</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <footer class="foot"><span>AI TEAM TRANSFORMATION</span><span>目标：从“个人会用”走向“组织复用”</span></footer>
+        </div>
+      </section>
+
+      <!-- 03｜总体机制 -->
+      <section class="slide light" aria-label="第 3 页：三层机制让深度协作与落地咬合">
+        <div class="slide-shell">
+          <header class="chrome"><span>02 / 总体机制</span><span>03 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head reveal">
+              <p class="kicker">OPERATING MODEL</p>
+              <h2 class="slide-title" data-editable>三层机制，让深度、协作与落地<em>彼此咬合</em></h2>
+            </div>
+            <div class="mechanism-grid reveal">
+              <article class="mechanism-card">
+                <div class="number">01</div>
+                <h3 data-editable>领域 Owner</h3>
+                <p data-editable>每人长期负责一个能力领域，以追踪、实验和判断形成纵向专业深度。</p>
+              </article>
+              <article class="mechanism-card">
+                <div class="number">02</div>
+                <h3 data-editable>共同技术底座</h3>
+                <p data-editable>统一认知、工程能力与交付标准，降低沟通和重复建设成本。</p>
+              </article>
+              <article class="mechanism-card">
+                <div class="number">03</div>
+                <h3 data-editable>跨领域项目</h3>
+                <p data-editable>从真实业务问题出发，把 3～5 个领域连接成可衡量的端到端闭环。</p>
+              </article>
+            </div>
+            <div class="flywheel reveal">
+              <strong data-editable>领域研究</strong><span class="arrow">→</span>
+              <strong data-editable>项目验证</strong><span class="arrow">→</span>
+              <strong data-editable>资产沉淀</strong><span class="arrow">→</span>
+              <strong data-editable>底座增强</strong><span class="arrow">→</span>
+              <strong data-editable>下一项目更快</strong>
+            </div>
+          </div>
+          <footer class="foot"><span>建议投入：每人工作时间的 10%～20%</span><span>内部结构：基础 20% · 深耕 40% · 项目 40%</span></footer>
+        </div>
+      </section>
+
+      <!-- 04｜领域地图 -->
+      <section class="slide dark" aria-label="第 4 页：按长期问题分工而不是厂商和工具">
+        <div class="slide-shell">
+          <header class="chrome"><span>03 / 领域地图</span><span>04 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">8 CORE DOMAINS + 2 EXTENSIONS</p>
+              <h2 class="slide-title" data-editable>按长期问题分工，<em>而不是按厂商和工具分工</em></h2>
+            </div>
+            <div class="domain-grid reveal">
+              <article class="domain"><span class="meta-label">01 / MODEL</span><h3 data-editable>模型与推理工程</h3><p data-editable>模型选型、结构化输出、推理策略、微调、成本与性能。</p></article>
+              <article class="domain"><span class="meta-label">02 / KNOWLEDGE</span><h3 data-editable>RAG 与知识工程</h3><p data-editable>解析、切分、召回、重排、引用溯源、更新与记忆。</p></article>
+              <article class="domain"><span class="meta-label">03 / AGENT</span><h3 data-editable>Agent 与工作流</h3><p data-editable>Tool Calling、MCP、状态、重试、人工审批与长流程。</p></article>
+              <article class="domain"><span class="meta-label">04 / CODING</span><h3 data-editable>AI 编程与研发效能</h3><p data-editable>Coding Agent、测试、Review、代码理解与 DevOps。</p></article>
+              <article class="domain"><span class="meta-label">05 / MULTIMODAL</span><h3 data-editable>多模态与文档智能</h3><p data-editable>OCR、复杂 PDF、图表、图像、语音和视频理解。</p></article>
+              <article class="domain"><span class="meta-label">06 / EVALS</span><h3 data-editable>AI 评测与可观测性</h3><p data-editable>测试集、自动评测、Tracing、幻觉、质量与成本。</p></article>
+              <article class="domain"><span class="meta-label">07 / LLMOPS</span><h3 data-editable>AI 平台与 LLMOps</h3><p data-editable>模型网关、部署、缓存、限流、路由、降级与治理。</p></article>
+              <article class="domain"><span class="meta-label">08 / GOVERNANCE</span><h3 data-editable>AI 安全与治理</h3><p data-editable>注入、越权、泄露、隐私、审计、内容安全与合规。</p></article>
+            </div>
+            <div class="extension-strip reveal">
+              <span class="tag">第 9、10 人</span>
+              <p data-editable><strong>AI 产品与交互：</strong>AI Native 产品、人机协作、反馈与业务价值。</p>
+              <p data-editable><strong>数据与模型适配：</strong>数据集、合成数据、微调、蒸馏与质量。</p>
+            </div>
+          </div>
+          <footer class="foot"><span>每个领域设置一名备份成员</span><span>不建立“OpenAI 专家”或“某框架专家”</span></footer>
+        </div>
+      </section>
+
+      <!-- 05｜Owner 工作闭环 -->
+      <section class="slide light" aria-label="第 5 页：Owner 负责形成判断而不是包办所有开发">
+        <div class="slide-shell">
+          <header class="chrome"><span>04 / OWNER 机制</span><span>05 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head reveal">
+              <p class="kicker">OWNER ACCOUNTABILITY</p>
+              <h2 class="slide-title" data-editable>Owner 负责形成判断，<em>不是包办所有开发</em></h2>
+            </div>
+            <div class="owner-loop reveal">
+              <article class="owner-step"><span class="meta-label">01</span><h3 data-editable>追踪</h3><p data-editable>识别真正重要的变化，而不是追逐全部热点。</p></article><span class="arrow">→</span>
+              <article class="owner-step"><span class="meta-label">02</span><h3 data-editable>理解</h3><p data-editable>解释机制、能力边界与适用条件。</p></article><span class="arrow">→</span>
+              <article class="owner-step"><span class="meta-label">03</span><h3 data-editable>实验</h3><p data-editable>用真实数据和对照基线做可复现验证。</p></article><span class="arrow">→</span>
+              <article class="owner-step"><span class="meta-label">04</span><h3 data-editable>应用</h3><p data-editable>把有效能力带入跨领域项目。</p></article><span class="arrow">→</span>
+              <article class="owner-step"><span class="meta-label">05</span><h3 data-editable>沉淀</h3><p data-editable>形成组件、规范、评测集与决策记录。</p></article>
+            </div>
+            <div class="deliverables reveal">
+              <h3 data-editable>每两周至少形成一项有效产出</h3>
+              <div class="deliverable-row">
+                <div class="deliverable" data-editable>可复现实验</div>
+                <div class="deliverable" data-editable>带结论的技术对比</div>
+                <div class="deliverable" data-editable>可运行 Demo</div>
+                <div class="deliverable" data-editable>可复用组件或模板</div>
+                <div class="deliverable" data-editable>适用边界与风险指南</div>
+              </div>
+            </div>
+          </div>
+          <footer class="foot"><span>角色：技术雷达 · 实验者 · 规范制定者 · 团队赋能者</span><span>关键资产必须有维护人、版本、回滚与决策记录</span></footer>
+        </div>
+      </section>
+
+      <!-- 06｜共同认知底座 -->
+      <section class="slide dark" aria-label="第 6 页：共同认知底座让效果不好可以被准确拆解">
+        <div class="slide-shell">
+          <header class="chrome"><span>05 / 共同底座 · 认知</span><span>06 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">FOUNDATION 01 / SHARED LANGUAGE</p>
+              <h2 class="slide-title" data-editable>共同认知底座，让“效果不好”<em>可以被准确拆解</em></h2>
+            </div>
+            <div class="cognition-grid reveal">
+              <article class="cognition"><h3 data-editable>大模型基础</h3><p data-editable>Token、上下文、幻觉、采样参数与能力边界。</p></article>
+              <article class="cognition"><h3 data-editable>模型调用</h3><p data-editable>API、流式输出、结构化输出与 Tool Calling。</p></article>
+              <article class="cognition"><h3 data-editable>Prompt 与 Context</h3><p data-editable>System Prompt、Few-shot、上下文组织和版本。</p></article>
+              <article class="cognition"><h3 data-editable>RAG 基础</h3><p data-editable>切分、Embedding、召回、重排与引用溯源。</p></article>
+              <article class="cognition"><h3 data-editable>Agent 基础</h3><p data-editable>工具、状态、工作流、重试与人工审批。</p></article>
+              <article class="cognition"><h3 data-editable>AI 评测</h3><p data-editable>测试集、人工评估、成本、延迟和稳定性。</p></article>
+              <article class="cognition"><h3 data-editable>安全基础</h3><p data-editable>Prompt Injection、越权、隐私和输出校验。</p></article>
+              <article class="cognition"><h3 data-editable>产品判断</h3><p data-editable>适用场景、失败代价、价值和人工介入点。</p></article>
+            </div>
+            <div class="diagnostic reveal">
+              <strong data-editable>诊断链</strong>
+              <span data-editable>模型</span><span class="arrow">→</span>
+              <span data-editable>上下文</span><span class="arrow">→</span>
+              <span data-editable>检索</span><span class="arrow">→</span>
+              <span data-editable>工具</span><span class="arrow">→</span>
+              <span data-editable>工作流</span><span class="arrow">→</span>
+              <span data-editable>评测方法</span>
+            </div>
+          </div>
+          <footer class="foot"><span>共同语言不是“人人精通全部方向”</span><span>而是能够共同定位问题、比较方案和协同交付</span></footer>
+        </div>
+      </section>
+
+      <!-- 07｜共同工程底座 -->
+      <section class="slide light" aria-label="第 7 页：共同工程底座先做薄 Starter Kit">
+        <div class="slide-shell">
+          <header class="chrome"><span>06 / 共同底座 · 工程</span><span>07 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">FOUNDATION 02 / STARTER KIT</p>
+              <h2 class="slide-title" data-editable>共同工程底座，<em>先做薄 Starter Kit</em></h2>
+            </div>
+            <div class="stack reveal">
+              <div class="stack-row apps">
+                <div class="stack-cell"><h3 data-editable>知识助手</h3><p data-editable>搜索、问答、引用</p></div>
+                <div class="stack-cell"><h3 data-editable>业务 Agent</h3><p data-editable>工具、流程、审批</p></div>
+                <div class="stack-cell"><h3 data-editable>研发助手</h3><p data-editable>代码、测试、Review</p></div>
+                <div class="stack-cell"><h3 data-editable>文档智能</h3><p data-editable>解析、抽取、审阅</p></div>
+              </div>
+              <div class="stack-row foundation">
+                <div class="stack-cell core"><h3 data-editable>统一模型访问</h3><p data-editable>版本、路由、参数、成本与故障切换。</p></div>
+                <div class="stack-cell core"><h3 data-editable>Prompt 管理</h3><p data-editable>模板、版本、回滚与变更记录。</p></div>
+                <div class="stack-cell core"><h3 data-editable>结构化输出</h3><p data-editable>Schema 校验、修复与失败路径。</p></div>
+                <div class="stack-cell core"><h3 data-editable>Tool / MCP</h3><p data-editable>输入输出、权限、副作用与异常语义。</p></div>
+                <div class="stack-cell core"><h3 data-editable>基础 RAG</h3><p data-editable>解析、索引、检索、重排与引用。</p></div>
+                <div class="stack-cell core"><h3 data-editable>日志与 Tracing</h3><p data-editable>模型、Prompt、工具、异常与问题复现。</p></div>
+                <div class="stack-cell core"><h3 data-editable>评测与回归</h3><p data-editable>数据集、规则评测、模型评测和人工评测。</p></div>
+                <div class="stack-cell core"><h3 data-editable>运行与安全</h3><p data-editable>权限、密钥、重试、限流、缓存与降级。</p></div>
+              </div>
+              <div class="stack-row sources">
+                <div class="stack-cell"><h3 data-editable>模型供应商</h3><p data-editable>商业与开源模型</p></div>
+                <div class="stack-cell"><h3 data-editable>知识与数据</h3><p data-editable>文档、数据库、向量索引</p></div>
+                <div class="stack-cell"><h3 data-editable>企业工具</h3><p data-editable>代码、工单、监控、业务系统</p></div>
+                <div class="stack-cell"><h3 data-editable>质量与治理</h3><p data-editable>评测集、安全策略、审计</p></div>
+              </div>
+            </div>
+          </div>
+          <footer class="foot"><span>原则：从真实项目抽取公共能力</span><span>不在需求未验证时建设大型 AI 中台</span></footer>
+        </div>
+      </section>
+
+      <!-- 08｜共同交付底座 -->
+      <section class="slide dark" aria-label="第 8 页：从 Demo 到可交付要跨过九道门槛">
+        <div class="slide-shell">
+          <header class="chrome"><span>07 / 共同底座 · 交付</span><span>08 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">FOUNDATION 03 / DEFINITION OF DONE</p>
+              <h2 class="slide-title" data-editable>从 Demo 到可交付，<em>要跨过九道门槛</em></h2>
+            </div>
+            <div class="dod-grid reveal">
+              <article class="dod-item"><b>01</b><div><h3 data-editable>边界清楚</h3><p data-editable>业务输入、输出、用户和使用范围明确。</p></div></article>
+              <article class="dod-item"><b>02</b><div><h3 data-editable>现状基线</h3><p data-editable>知道人工或非 AI 方案当前做到什么水平。</p></div></article>
+              <article class="dod-item"><b>03</b><div><h3 data-editable>真实测试集</h3><p data-editable>样本来自真实工作流，覆盖成功与失败。</p></div></article>
+              <article class="dod-item"><b>04</b><div><h3 data-editable>四项指标</h3><p data-editable>质量、成本、延迟和稳定性可量化。</p></div></article>
+              <article class="dod-item"><b>05</b><div><h3 data-editable>失败回退</h3><p data-editable>重试、降级、人工接管和撤回路径明确。</p></div></article>
+              <article class="dod-item"><b>06</b><div><h3 data-editable>人工确认</h3><p data-editable>高风险节点不由模型独立完成最终决策。</p></div></article>
+              <article class="dod-item"><b>07</b><div><h3 data-editable>可观测复现</h3><p data-editable>完整记录模型、Prompt、工具和异常。</p></div></article>
+              <article class="dod-item"><b>08</b><div><h3 data-editable>权限安全</h3><p data-editable>数据访问、敏感信息和执行权限经过检查。</p></div></article>
+              <article class="dod-item"><b>09</b><div><h3 data-editable>变更回归</h3><p data-editable>模型、Prompt 或知识变化后能够自动复测。</p></div></article>
+            </div>
+            <div class="graduation reveal">
+              <span class="tag">共同毕业线</span>
+              <p data-editable>每个人都能独立完成一个包含模型、结构化输出、工具或知识库、测试集、Tracing、成本与风险说明的小型端到端 AI 应用。</p>
+            </div>
+          </div>
+          <footer class="foot"><span>评测是每个 AI 项目的必选能力</span><span>可以复现失败，才有资格讨论优化</span></footer>
+        </div>
+      </section>
+
+      <!-- 09｜项目选择 -->
+      <section class="slide light" aria-label="第 9 页：项目选择先过入口再做七维评分">
+        <div class="slide-shell">
+          <header class="chrome"><span>08 / 项目选择</span><span>09 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">PROJECT SELECTION</p>
+              <h2 class="slide-title" data-editable>先过一个入口门槛，<em>再做七维评分</em></h2>
+            </div>
+            <div class="score-layout">
+              <div class="score-list reveal">
+                <div class="score-row"><span data-editable>业务价值</span><div class="score-track"><div class="score-fill" style="width:100%"></div></div><b class="score-value">25</b></div>
+                <div class="score-row"><span data-editable>可测量性</span><div class="score-track"><div class="score-fill" style="width:80%"></div></div><b class="score-value">20</b></div>
+                <div class="score-row"><span data-editable>数据可得性</span><div class="score-track"><div class="score-fill" style="width:60%"></div></div><b class="score-value">15</b></div>
+                <div class="score-row"><span data-editable>复用价值</span><div class="score-track"><div class="score-fill" style="width:60%"></div></div><b class="score-value">15</b></div>
+                <div class="score-row"><span data-editable>风险可控性</span><div class="score-track"><div class="score-fill" style="width:40%"></div></div><b class="score-value">10</b></div>
+                <div class="score-row"><span data-editable>跨领域覆盖</span><div class="score-track"><div class="score-fill" style="width:40%"></div></div><b class="score-value">10</b></div>
+                <div class="score-row"><span data-editable>首次价值时间</span><div class="score-track"><div class="score-fill" style="width:20%"></div></div><b class="score-value">05</b></div>
+              </div>
+              <div class="entry-gate reveal">
+                <span class="tag">入口门槛</span>
+                <h3 data-editable>必须来自真实、高频、信息分散且输入输出相对清晰的工作流</h3>
+                <ul class="dash-list">
+                  <li data-editable>有明确用户和可获得的数据</li>
+                  <li data-editable>2～6 周能看到真实结果</li>
+                  <li data-editable>错误可发现、可撤回、可人工接管</li>
+                  <li data-editable>项目结束后能留下公共资产</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <footer class="foot"><span>首个项目不追求技术最先进</span><span>优先：价值明确 · 数据可得 · 反馈快速 · 风险可控</span></footer>
+        </div>
+      </section>
+
+      <!-- 10｜跨领域项目地图 -->
+      <section class="slide dark" aria-label="第 10 页：一个项目连接三到五个领域已经足够">
+        <div class="slide-shell">
+          <header class="chrome"><span>09 / 跨领域项目</span><span>10 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">CROSS-DOMAIN PORTFOLIO</p>
+              <h2 class="slide-title" data-editable>一个项目连接 3～5 个领域，<em>已经足够</em></h2>
+            </div>
+            <div class="project-matrix reveal">
+              <article class="project"><h3 data-editable>技术知识与故障排查</h3><p data-editable>检索知识、调用日志工具并给出带来源的排查建议。</p><div class="domains">RAG · AGENT · EVALS · LLMOPS · SECURITY</div></article>
+              <article class="project"><h3 data-editable>代码库理解与影响分析</h3><p data-editable>理解大型代码库，定位变更影响和潜在风险。</p><div class="domains">AI CODING · RAG · MODEL · EVALS</div></article>
+              <article class="project"><h3 data-editable>会议纪要与任务跟踪</h3><p data-editable>从语音到纪要、任务分派和后续跟进。</p><div class="domains">MULTIMODAL · AGENT · WORKFLOW · SECURITY</div></article>
+              <article class="project"><h3 data-editable>合同或方案审阅</h3><p data-editable>解析复杂文档、识别风险并输出结构化意见。</p><div class="domains">DOCUMENT · RAG · MODEL · EVALS · SECURITY</div></article>
+              <article class="project"><h3 data-editable>运维工单分类与建议</h3><p data-editable>分类、查找历史案例并生成下一步处理建议。</p><div class="domains">MODEL · RAG · AGENT · OBSERVABILITY</div></article>
+              <article class="project"><h3 data-editable>需求到技术任务拆解</h3><p data-editable>从需求澄清到方案、任务、测试和人工审核。</p><div class="domains">AGENT · AI CODING · EVALS · HUMAN REVIEW</div></article>
+            </div>
+            <div class="gold-note reveal" style="margin-top:24px">
+              <p class="lead" data-editable>跨领域不是技术拼盘；不要为了覆盖全部领域而增加不必要的复杂性。</p>
+            </div>
+          </div>
+          <footer class="foot"><span>双重产出：解决当前问题 + 反向建设共同底座</span><span>评测与人工确认贯穿所有项目</span></footer>
+        </div>
+      </section>
+
+      <!-- 11｜小队与六周节奏 -->
+      <section class="slide light" aria-label="第 11 页：三到四人小队六周完成一次真实验证">
+        <div class="slide-shell">
+          <header class="chrome"><span>10 / 项目组织</span><span>11 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">SQUAD + SIX-WEEK LOOP</p>
+              <h2 class="slide-title" data-editable>3～4 人小队，<em>六周完成一次真实验证</em></h2>
+            </div>
+            <div class="squad-layout">
+              <div class="roles reveal">
+                <article class="role"><span class="meta-label">ROLE 01</span><h3 data-editable>场景负责人</h3><p data-editable>定义用户、工作流、基线和业务验收结果。</p></article>
+                <article class="role"><span class="meta-label">ROLE 02</span><h3 data-editable>1～2 名领域 Owner</h3><p data-editable>实现核心技术，并对方案与边界负责。</p></article>
+                <article class="role"><span class="meta-label">ROLE 03</span><h3 data-editable>评测 / 平台负责人</h3><p data-editable>确保结果可信、过程可观测、能力可复用。</p></article>
+                <article class="role"><span class="meta-label">ROLE 04</span><h3 data-editable>安全评审</h3><p data-editable>前置检查数据、权限、人工确认和上线门禁。</p></article>
+              </div>
+              <div class="six-week reveal">
+                <div class="week"><span class="number">W1</span><div><h3 data-editable>问题定义</h3><p data-editable>用户、工作流、数据、风险与非 AI 基线。</p></div><span class="gate">继续 / 停止</span></div>
+                <div class="week"><span class="number">W2–3</span><div><h3 data-editable>最小原型</h3><p data-editable>端到端链路跑通，真实样本可以演示。</p></div><span class="gate">原型门</span></div>
+                <div class="week"><span class="number">W4–5</span><div><h3 data-editable>评测优化</h3><p data-editable>建立测试集，聚类失败类型，优化主要问题。</p></div><span class="gate">试用门</span></div>
+                <div class="week"><span class="number">W6</span><div><h3 data-editable>内部试用</h3><p data-editable>继续、调整或停止；至少沉淀一项公共资产。</p></div><span class="gate">投资决策</span></div>
+              </div>
+            </div>
+          </div>
+          <footer class="foot"><span>不建议 8～10 人共同开发一个大项目</span><span>评测是每个项目的必选角色或必选职责</span></footer>
+        </div>
+      </section>
+
+      <!-- 12｜推荐首个项目 -->
+      <section class="slide dark" aria-label="第 12 页：推荐首个项目技术知识与故障排查助手">
+        <div class="slide-shell">
+          <header class="chrome"><span>11 / 推荐首个项目</span><span>12 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">FIRST CROSS-DOMAIN PROJECT</p>
+              <h2 class="slide-title" data-editable>技术知识与故障排查助手：<em>低风险地练完整闭环</em></h2>
+            </div>
+            <div class="assistant-flow reveal">
+              <article class="flow-node"><span class="meta-label">INPUT</span><h3 data-editable>工程师问题</h3><p data-editable>真实故障、现象与上下文。</p></article><span class="arrow">→</span>
+              <article class="flow-node"><span class="meta-label">KNOWLEDGE</span><h3 data-editable>文档 / 历史故障</h3><p data-editable>检索内部技术文档、工单和解决方案。</p></article><span class="arrow">→</span>
+              <article class="flow-node"><span class="meta-label">TOOLS</span><h3 data-editable>日志 / 监控 / 代码</h3><p data-editable>按权限调用只读工具补充证据。</p></article><span class="arrow">→</span>
+              <article class="flow-node"><span class="meta-label">REASONING</span><h3 data-editable>带来源的排查步骤</h3><p data-editable>结构化建议、证据、置信度与下一步。</p></article><span class="arrow">→</span>
+              <article class="flow-node"><span class="meta-label">HUMAN</span><h3 data-editable>工程师确认</h3><p data-editable>不自动执行高风险操作。</p></article>
+            </div>
+            <div class="metric-strip reveal">
+              <article class="metric"><span class="number">TTR</span><p data-editable>平均故障定位与解决时间</p></article>
+              <article class="metric"><span class="number">引用</span><p data-editable>来源准确性与证据覆盖率</p></article>
+              <article class="metric"><span class="number">采纳</span><p data-editable>排查建议采纳率</p></article>
+              <article class="metric"><span class="number">修改</span><p data-editable>人工修改率与失败类型</p></article>
+              <article class="metric"><span class="number">成本</span><p data-editable>单次任务成本与延迟</p></article>
+            </div>
+            <div class="gold-note reveal" style="margin-top:24px"><p class="lead" data-editable>内部用户明确、数据相对可控、反馈周期短，并能同时锻炼 RAG、Agent、评测、平台与安全。</p></div>
+          </div>
+          <footer class="foot"><span>推进顺序：信息辅助 → 建议生成 → 人工确认后执行</span><span>暂不进入自动化生产操作</span></footer>
+        </div>
+      </section>
+
+      <!-- 13｜周会机制 -->
+      <section class="slide light" aria-label="第 13 页：周会采用异步全覆盖轮流深讲月度联调">
+        <div class="slide-shell">
+          <header class="chrome"><span>12 / 组织学习</span><span>13 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head reveal">
+              <p class="kicker">LEARNING OPERATING SYSTEM</p>
+              <h2 class="slide-title" data-editable>异步全覆盖、轮流深讲、<em>月度联调</em></h2>
+            </div>
+            <div class="cadence-grid reveal">
+              <article class="cadence"><span class="number">周</span><h3 data-editable>领域异步更新</h3><p data-editable>每位 Owner 提交一页六问周报，覆盖变化、实验、结论、风险与行动。</p></article>
+              <article class="cadence"><span class="number">月</span><h3 data-editable>跨领域联合 Demo</h3><p data-editable>展示真实流程、评测、失败案例，以及沉淀了哪些公共资产。</p></article>
+              <article class="cadence"><span class="number">季</span><h3 data-editable>领域与底座复盘</h3><p data-editable>调整 Owner、备份、项目组合、研究方向和共同底座版本。</p></article>
+            </div>
+            <div class="deep-dive reveal">
+              <span class="tag">单人深讲 30–40 分钟</span>
+              <div class="deep-step" data-editable>01<br>重要变化</div>
+              <div class="deep-step" data-editable>02<br>真实问题</div>
+              <div class="deep-step" data-editable>03<br>实验方法</div>
+              <div class="deep-step" data-editable>04<br>质量 / 成本 / 延迟</div>
+              <div class="deep-step" data-editable>05<br>失败与边界</div>
+              <div class="deep-step" data-editable>06<br>投入决策</div>
+            </div>
+            <div class="gold-note reveal" style="margin-top:28px"><p class="lead" data-editable>红线：只有新闻摘要、只有成功路径、没有数据、没有复用资产，均不算有效深讲。</p></div>
+          </div>
+          <footer class="foot"><span>不要让 8 位 Owner 每周逐个口头汇报</span><span>周会从“信息播报”升级为“组织学习”</span></footer>
+        </div>
+      </section>
+
+      <!-- 14｜衡量指标 -->
+      <section class="slide dark" aria-label="第 14 页：别数学习量要看真实采用">
+        <div class="slide-shell">
+          <header class="chrome"><span>13 / 衡量指标</span><span>14 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">MEASURE ADOPTION, NOT ACTIVITY</p>
+              <h2 class="slide-title" data-editable>别数学习量，<em>要看真实采用</em></h2>
+            </div>
+            <div class="measure-layout">
+              <div class="vanity reveal">
+                <h3 data-editable>不作为主要成果</h3>
+                <ul class="dash-list">
+                  <li data-editable>阅读论文和收藏链接数量</li>
+                  <li data-editable>关注工具和接入模型数量</li>
+                  <li data-editable>周会分享和 PPT 页数</li>
+                  <li data-editable>一次性 Demo 和模型调用量</li>
+                </ul>
+                <p class="lead" data-editable style="margin-top:32px">它们可以记录，但不能证明团队能力已经发生变化。</p>
+              </div>
+              <div class="outcomes reveal">
+                <h3 data-editable>真正需要追踪</h3>
+                <div class="grid-2">
+                  <div class="panel"><h4 data-editable>资产复用</h4><p data-editable>组件、模板、测试集和规范被多少项目使用。</p></div>
+                  <div class="panel"><h4 data-editable>真实采用</h4><p data-editable>能力是否进入真实工作流，并被用户持续使用。</p></div>
+                  <div class="panel"><h4 data-editable>效率与质量</h4><p data-editable>处理时间、成本、人工修改率和稳定性变化。</p></div>
+                  <div class="panel"><h4 data-editable>组织能力</h4><p data-editable>跨 Owner 使用、自动回归和团队标准是否形成。</p></div>
+                </div>
+                <div class="milestone">
+                  <div><b>8</b><span data-editable>领域地图</span></div>
+                  <div><b>100%</b><span data-editable>全员毕业</span></div>
+                  <div><b>16</b><span data-editable>可复现实验</span></div>
+                  <div><b>4+</b><span data-editable>公共资产</span></div>
+                  <div><b>2</b><span data-editable>跨领域 MVP</span></div>
+                  <div><b>1</b><span data-editable>持续内部试用</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="foot"><span>数量目标必须配合项目的业务结果基线</span><span>连续数月只有分享而没有真实采用，应立即纠偏</span></footer>
+        </div>
+      </section>
+
+      <!-- 15｜十二周路线图 -->
+      <section class="slide light" aria-label="第 15 页：十二周从领域地图走到内部试用">
+        <div class="slide-shell">
+          <header class="chrome"><span>14 / 90 天启动</span><span>15 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head reveal">
+              <p class="kicker">12-WEEK LAUNCH PLAN</p>
+              <h2 class="slide-title" data-editable>十二周，从领域地图<em>走到内部试用</em></h2>
+            </div>
+            <div class="roadmap reveal">
+              <article class="roadmap-stage"><span class="number">W1–2</span><h3 data-editable>对齐与盘点</h3><p data-editable>成员背景、业务需求、数据条件与候选项目。</p><span class="tag">领域地图 · 能力基线 · 项目池</span></article>
+              <article class="roadmap-stage"><span class="number">W3–6</span><h3 data-editable>共建底座</h3><p data-editable>模型、结构化输出、RAG、Agent、评测与安全实践。</p><span class="tag">全员实践 · Starter Kit v0.1</span></article>
+              <article class="roadmap-stage"><span class="number">W7–10</span><h3 data-editable>项目验证</h3><p data-editable>两个小队完成跨领域 MVP 与真实测试集。</p><span class="tag">MVP · 数据集 · 评测结果</span></article>
+              <article class="roadmap-stage"><span class="number">W11–12</span><h3 data-editable>试用复盘</h3><p data-editable>内部试用、失败分析、投资决策与资产抽取。</p><span class="tag">继续 / 停止 · 底座 v0.2</span></article>
+            </div>
+            <div class="grid-3 reveal" style="margin-top:36px">
+              <div class="panel gold-top"><h3 data-editable>组织结果</h3><p data-editable>Owner 与备份就位，周会和季度复盘开始运转。</p></div>
+              <div class="panel gold-top"><h3 data-editable>工程结果</h3><p data-editable>共同底座被至少两个项目验证，而不是停留在设计。</p></div>
+              <div class="panel gold-top"><h3 data-editable>业务结果</h3><p data-editable>至少一个项目进入持续内部试用，并形成可测量基线。</p></div>
+            </div>
+          </div>
+          <footer class="foot"><span>每个阶段都有明确出口</span><span>90 天后决定扩大投入、调整方向或停止</span></footer>
+        </div>
+      </section>
+
+      <!-- 16｜风险与最终判断 -->
+      <section class="slide dark" aria-label="第 16 页：八种常见失败最终只看一个结果">
+        <div class="slide-shell">
+          <header class="chrome"><span>15 / 最终判断</span><span>16 / 16</span></header>
+          <div class="slide-main">
+            <div class="section-head compact reveal">
+              <p class="kicker">THE ONLY TEST THAT MATTERS</p>
+              <h2 class="slide-title" data-editable>八种常见失败，<em>最终只看一个结果</em></h2>
+            </div>
+            <div class="risk-grid reveal">
+              <article class="risk"><h3 data-editable>知识孤岛</h3><p data-editable>设置备份成员，在项目中交叉协作和接手。</p></article>
+              <article class="risk"><h3 data-editable>追逐热点</h3><p data-editable>强制要求实验、结论、适用边界和风险。</p></article>
+              <article class="risk"><h3 data-editable>Demo 陷阱</h3><p data-editable>使用真实测试集和非 AI 基线评估效果。</p></article>
+              <article class="risk"><h3 data-editable>过早平台化</h3><p data-editable>从薄 Starter Kit 开始，按重复需求抽取。</p></article>
+              <article class="risk"><h3 data-editable>项目过大</h3><p data-editable>以 2～6 周可验证 MVP 为明确边界。</p></article>
+              <article class="risk"><h3 data-editable>自动化过度</h3><p data-editable>先做建议和人工确认，再逐步扩大执行权。</p></article>
+              <article class="risk"><h3 data-editable>只交付不沉淀</h3><p data-editable>每个项目至少回馈一项可维护公共资产。</p></article>
+              <article class="risk"><h3 data-editable>资产无人维护</h3><p data-editable>明确 Owner、版本、回滚方式和决策记录。</p></article>
+            </div>
+            <p class="closing-question reveal" data-editable>三个月后，新项目能否直接复用前一个项目的模型接入、知识处理、工具调用、评测、安全与监控能力？</p>
+            <p class="lead reveal" data-editable>如果每次仍然从零开始，转型就还没有发生。</p>
+          </div>
+          <footer class="foot"><span>领域研究 → 项目验证 → 资产沉淀 → 底座增强</span><span>END / 让团队能力开始复利</span></footer>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 屏幕导航：不进入固定 1920×1080 画布 -->
+  <nav class="deck-controls" aria-label="幻灯片进度">
+    <span id="progressCounter">01 / 16</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span>← →</span>
+  </nav>
+
+  <!-- 浏览器内编辑入口 -->
+  <div class="edit-hotzone" aria-label="开启编辑模式"></div>
+  <button class="edit-toggle" id="editToggle" type="button" title="编辑模式（E）">编辑 / E</button>
+  <div class="edit-status" id="editStatus">编辑中 · Ctrl/Cmd+S 导出</div>
+
+  <script>
+    /* ===========================================
+       SLIDE PRESENTATION CONTROLLER
+       =========================================== */
+    class SlidePresentation {
+      constructor() {
+        this.slides = Array.from(document.querySelectorAll(".slide"));
+        this.stage = document.getElementById("deckStage");
+        this.counter = document.getElementById("progressCounter");
+        this.progress = document.getElementById("progressFill");
+        this.currentSlide = this.readInitialSlide();
+        this.wheelLocked = false;
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.setupStageScale();
+        this.setupKeyboardNavigation();
+        this.setupWheelNavigation();
+        this.setupTouchNavigation();
+        this.showSlide(this.currentSlide, false);
+      }
+
+      readInitialSlide() {
+        const value = Number(window.location.hash.replace("#", ""));
+        return Number.isInteger(value) && value >= 1 && value <= this.slides.length ? value - 1 : 0;
+      }
+
+      setupStageScale() {
+        const scaleStage = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = "translate(" + x + "px, " + y + "px) scale(" + factor + ")";
+        };
+        scaleStage();
+        window.addEventListener("resize", scaleStage);
+      }
+
+      isTypingTarget(target) {
+        return Boolean(target.closest('[contenteditable="true"], input, textarea, select'));
+      }
+
+      setupKeyboardNavigation() {
+        document.addEventListener("keydown", (event) => {
+          if (this.isTypingTarget(event.target)) return;
+          if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(event.key)) {
+            event.preventDefault();
+            this.next();
+          } else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key)) {
+            event.preventDefault();
+            this.previous();
+          } else if (event.key === "Home") {
+            event.preventDefault();
+            this.showSlide(0);
+          } else if (event.key === "End") {
+            event.preventDefault();
+            this.showSlide(this.slides.length - 1);
+          }
+        });
+      }
+
+      setupWheelNavigation() {
+        window.addEventListener("wheel", (event) => {
+          if (this.wheelLocked || Math.abs(event.deltaY) < 20) return;
+          this.wheelLocked = true;
+          event.deltaY > 0 ? this.next() : this.previous();
+          window.setTimeout(() => { this.wheelLocked = false; }, 650);
+        }, { passive: true });
+      }
+
+      setupTouchNavigation() {
+        window.addEventListener("touchstart", (event) => {
+          this.touchStartX = event.changedTouches[0].screenX;
+          this.touchStartY = event.changedTouches[0].screenY;
+        }, { passive: true });
+        window.addEventListener("touchend", (event) => {
+          const deltaX = event.changedTouches[0].screenX - this.touchStartX;
+          const deltaY = event.changedTouches[0].screenY - this.touchStartY;
+          if (Math.abs(deltaX) > 55 && Math.abs(deltaX) > Math.abs(deltaY)) {
+            deltaX < 0 ? this.next() : this.previous();
+          }
+        }, { passive: true });
+      }
+
+      next() {
+        this.showSlide(this.currentSlide + 1);
+      }
+
+      previous() {
+        this.showSlide(this.currentSlide - 1);
+      }
+
+      showSlide(index, updateHash = true) {
+        this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((slide, slideIndex) => {
+          const isCurrent = slideIndex === this.currentSlide;
+          slide.classList.toggle("active", isCurrent);
+          slide.classList.toggle("visible", isCurrent);
+          slide.setAttribute("aria-hidden", String(!isCurrent));
+        });
+        const number = String(this.currentSlide + 1).padStart(2, "0");
+        this.counter.textContent = number + " / " + this.slides.length;
+        this.progress.style.width = ((this.currentSlide + 1) / this.slides.length * 100) + "%";
+        if (updateHash) history.replaceState(null, "", "#" + (this.currentSlide + 1));
+      }
+    }
+
+    /* ===========================================
+       INLINE EDITOR WITH LOCAL PERSISTENCE
+       =========================================== */
+    class InlineEditor {
+      constructor() {
+        this.storageKey = "ai-team-transformation-edits-v1";
+        this.editables = Array.from(document.querySelectorAll("[data-editable]"));
+        this.toggleButton = document.getElementById("editToggle");
+        this.status = document.getElementById("editStatus");
+        this.isActive = false;
+        this.saveTimer = null;
+        this.restore();
+        this.setupInputPersistence();
+      }
+
+      toggleEditMode() {
+        this.isActive = !this.isActive;
+        this.editables.forEach((element) => {
+          element.setAttribute("contenteditable", String(this.isActive));
+          element.setAttribute("spellcheck", String(this.isActive));
+        });
+        this.toggleButton.classList.toggle("active", this.isActive);
+        this.toggleButton.textContent = this.isActive ? "退出编辑 / E" : "编辑 / E";
+        this.status.classList.toggle("show", this.isActive);
+        if (!this.isActive) this.save();
+      }
+
+      setupInputPersistence() {
+        this.editables.forEach((element) => {
+          element.addEventListener("input", () => {
+            window.clearTimeout(this.saveTimer);
+            this.saveTimer = window.setTimeout(() => this.save(), 350);
+          });
+        });
+      }
+
+      save() {
+        const values = this.editables.map((element) => element.innerHTML);
+        localStorage.setItem(this.storageKey, JSON.stringify(values));
+      }
+
+      restore() {
+        try {
+          const values = JSON.parse(localStorage.getItem(this.storageKey) || "null");
+          if (Array.isArray(values)) {
+            this.editables.forEach((element, index) => {
+              if (typeof values[index] === "string") element.innerHTML = values[index];
+            });
+          }
+        } catch (error) {
+          console.warn("未能恢复本地编辑内容", error);
+        }
+      }
+
+      exportHtml() {
+        this.save();
+        const clone = document.documentElement.cloneNode(true);
+        clone.querySelectorAll('[contenteditable="true"]').forEach((element) => {
+          element.setAttribute("contenteditable", "false");
+          element.removeAttribute("spellcheck");
+        });
+        const html = "<!doctype html>\n" + clone.outerHTML;
+        const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "ai-team-transformation-edited.html";
+        link.click();
+        window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      }
+    }
+
+    const presentation = new SlidePresentation();
+    const editor = new InlineEditor();
+
+    /* ===========================================
+       EDIT CONTROL INTERACTIONS
+       =========================================== */
+    const hotzone = document.querySelector(".edit-hotzone");
+    const editToggle = document.getElementById("editToggle");
+    let hideTimeout = null;
+
+    hotzone.addEventListener("mouseenter", () => {
+      window.clearTimeout(hideTimeout);
+      editToggle.classList.add("show");
+    });
+
+    hotzone.addEventListener("mouseleave", () => {
+      hideTimeout = window.setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove("show");
+      }, 400);
+    });
+
+    editToggle.addEventListener("mouseenter", () => window.clearTimeout(hideTimeout));
+    editToggle.addEventListener("mouseleave", () => {
+      hideTimeout = window.setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove("show");
+      }, 400);
+    });
+
+    editToggle.addEventListener("click", () => editor.toggleEditMode());
+    hotzone.addEventListener("click", () => editor.toggleEditMode());
+
+    document.addEventListener("keydown", (event) => {
+      const isEditable = Boolean(event.target.closest('[contenteditable="true"]'));
+      if ((event.key === "e" || event.key === "E") && !isEditable && !event.metaKey && !event.ctrlKey) {
+        editor.toggleEditMode();
+      }
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "s") {
+        event.preventDefault();
+        editor.exportHtml();
+      }
+    });
+  </script>
+</body>
+</html>
