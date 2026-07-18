@@ -1,0 +1,9 @@
+.DS_Store
+dist/
+logs/*.log
+logs/*.pid
+logs/*.port
+internal/server/static/*
+!internal/server/static/placeholder.txt
+web/node_modules/
+web/coverage/
