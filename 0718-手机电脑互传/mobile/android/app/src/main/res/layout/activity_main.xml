@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="#171713"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pairing_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#5F5E58"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/pairing_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:hint="@string/pairing_hint"
+        android:importantForAutofill="no"
+        android:inputType="textUri"
+        android:maxLines="2" />
+
+    <Button
+        android:id="@+id/connect_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/connect_mac" />
+
+    <Button
+        android:id="@+id/choose_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/choose_files" />
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/resume_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/resume" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/pause_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/pause" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/retry_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/retry_failed" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/battery_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/battery_settings" />
+
+    <TextView
+        android:id="@+id/queue_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="#171713"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/upload_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:divider="#D9D6CC"
+        android:dividerHeight="1dp" />
+</LinearLayout>

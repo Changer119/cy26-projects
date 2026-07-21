@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Phone2Computer</string>
+    <string name="pairing_hint">粘贴浏览器中的配对链接</string>
+    <string name="connect_mac">连接 Mac</string>
+    <string name="choose_files">批量选择照片和视频</string>
+    <string name="resume">继续</string>
+    <string name="pause">暂停</string>
+    <string name="retry_failed">重试失败</string>
+    <string name="battery_settings">设置黑屏后台传输权限</string>
+    <string name="queue_summary">%1$d 个文件 · %2$d 已完成 · %3$d 失败 · %4$d%%</string>
+</resources>
