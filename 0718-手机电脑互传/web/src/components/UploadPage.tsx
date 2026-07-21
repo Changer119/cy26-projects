@@ -24,6 +24,8 @@ export function UploadPage({ runner }: UploadPageProps) {
   const failed = items.filter(({ state }) => state === "failed").length;
   const isPaused = items.some(({ state }) => state === "paused");
   const progress = totalBytes === 0 ? 0 : Math.round((uploadedBytes / totalBytes) * 100);
+  const token = new URLSearchParams(window.location.search).get("token") ?? "";
+  const appLink = `phone2computer://pair?server=${encodeURIComponent(window.location.origin)}&token=${encodeURIComponent(token)}`;
 
   const selectFiles = (fileList: FileList | null) => {
     if (!fileList?.length) return;
@@ -41,7 +43,11 @@ export function UploadPage({ runner }: UploadPageProps) {
       <section className="upload-hero">
         <p className="eyebrow">华为 P40 Pro · 本地直传</p>
         <h1>把这一刻，<br />送回你的 Mac。</h1>
-        <p>可一次选择数百张照片和视频，传输期间请保持本页面打开。</p>
+        <p className="hero-note">可一次选择数百张照片和视频；使用 App 后，切换页面或黑屏也能继续传输。</p>
+        <div className="app-actions">
+          <a className="app-handoff" href={appLink}>在 App 中继续</a>
+          <a className="apk-download" href="/Phone2Computer-v2.apk" download>下载华为版 APK</a>
+        </div>
       </section>
 
       <section className="upload-card">

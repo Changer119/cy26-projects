@@ -19,7 +19,7 @@ cd "${PROJECT_ROOT}"
       echo "错误：${file} 超过 ${limit} 行（${lines}）" >&2
       exit 1
     fi
-  done < <(find cmd internal web/src -type f \( -name '*.go' -o -name '*.ts' -o -name '*.tsx' \) -print0)
+  done < <(find cmd internal mobile/android/app/src web/src -type f \( -name '*.go' -o -name '*.java' -o -name '*.ts' -o -name '*.tsx' \) -print0)
 
   while IFS= read -r directory; do
     files="$(find "${directory}" -maxdepth 1 -type f | wc -l | tr -d ' ')"
@@ -27,7 +27,7 @@ cd "${PROJECT_ROOT}"
       echo "错误：目录直接文件超过 8 个：${directory}（${files}）" >&2
       exit 1
     fi
-  done < <(find cmd internal scripts web/src -type d)
+  done < <(find cmd internal mobile/android/app/src scripts web/src -type d)
 
   unformatted="$(gofmt -l cmd internal)"
   if [[ -n "${unformatted}" ]]; then
@@ -37,6 +37,7 @@ cd "${PROJECT_ROOT}"
   fi
 
   go vet ./...
+  "${PROJECT_ROOT}/scripts/mobile/check.sh"
   "${PROJECT_ROOT}/scripts/test.sh"
   "${PROJECT_ROOT}/scripts/build.sh"
 } 2>&1 | tee "${LOG_DIR}/check.log"

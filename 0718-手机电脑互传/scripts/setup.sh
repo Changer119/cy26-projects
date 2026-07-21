@@ -12,3 +12,5 @@ npm install
 
 cd "${PROJECT_ROOT}"
 go mod tidy
+
+"${PROJECT_ROOT}/scripts/mobile/setup.sh"

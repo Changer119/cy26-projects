@@ -7,3 +7,8 @@ internal/server/static/*
 !internal/server/static/placeholder.txt
 web/node_modules/
 web/coverage/
+web/public/Phone2Computer-v2.apk
+mobile/android/.gradle/
+mobile/android/.gradle-bootstrap/
+mobile/android/**/build/
+mobile/android/local.properties
