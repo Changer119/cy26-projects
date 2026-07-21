@@ -44,6 +44,32 @@ def test_two_consistent_sources_are_accepted() -> None:
     assert result.canonical.source == "primary"
 
 
+def test_valid_high_precision_prices_are_normalized_to_six_decimals() -> None:
+    result = MarketDataQualityGate(max_close_deviation_bps=Decimal("50")).validate(
+        make_bar(
+            "primary",
+            close="84.69000244140625",
+            open_price="76.69999694824219",
+            high="84.69000244140625",
+            low="69.29000091552734",
+        ),
+        make_bar(
+            "secondary",
+            close="84.69",
+            open_price="76.70",
+            high="84.69",
+            low="69.29",
+        ),
+    )
+
+    assert result.status is MarketDataStatus.VALID
+    assert result.canonical is not None
+    assert result.canonical.open == Decimal("76.699997")
+    assert result.canonical.high == Decimal("84.690002")
+    assert result.canonical.low == Decimal("69.290001")
+    assert result.canonical.close == Decimal("84.690002")
+
+
 def test_missing_secondary_source_is_quarantined() -> None:
     result = MarketDataQualityGate(max_close_deviation_bps=Decimal("50")).validate(
         make_bar("primary"),

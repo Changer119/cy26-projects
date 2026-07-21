@@ -3,10 +3,16 @@
 from __future__ import annotations
 
 from datetime import date
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+_PRICE_QUANTUM = Decimal("0.000001")
+
+
+def _normalize_price(value: Decimal) -> Decimal:
+    return value.quantize(_PRICE_QUANTUM, rounding=ROUND_HALF_UP)
 
 
 class MarketDataStatus(StrEnum):
@@ -208,10 +214,10 @@ class MarketDataQualityGate:
         return MarketBar(
             symbol=primary.symbol,
             trade_date=primary.trade_date,
-            open=primary.open,
-            high=primary.high,
-            low=primary.low,
-            close=primary.close,
+            open=_normalize_price(primary.open),
+            high=_normalize_price(primary.high),
+            low=_normalize_price(primary.low),
+            close=_normalize_price(primary.close),
             volume=min(primary.volume, secondary.volume),
             currency=primary.currency,
             source=primary.source,
