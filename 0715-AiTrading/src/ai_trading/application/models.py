@@ -51,6 +51,7 @@ class WorkflowReport(ApplicationModel):
 
 class PlanDecisionSummary(ApplicationModel):
     instrument_id: InstrumentId
+    instrument_name: str = Field(min_length=1, max_length=128)
     action: TradeAction
     current_quantity: int = Field(ge=0)
     target_quantity: int = Field(ge=0)

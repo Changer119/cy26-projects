@@ -57,6 +57,7 @@ class PlanReaderStub:
         return (
             PlanDecisionSummary(
                 instrument_id="603005.SH",
+                instrument_name="晶方科技",
                 action=TradeAction.BUY,
                 current_quantity=0,
                 target_quantity=100,
@@ -112,7 +113,7 @@ def test_scheduled_jobs_send_daily_plan_and_postmarket_report(tmp_path: Path) ->
         NotificationKind.POSTMARKET_REPORT,
     )
     assert all("仅模拟交易" in event.markdown for event in dispatcher.events)
-    assert "603005.SH：买入" in dispatcher.events[0].markdown
+    assert "603005.SH（晶方科技）：买入" in dispatcher.events[0].markdown
     assert "目标 100 股" in dispatcher.events[0].markdown
     assert "当日盈亏：+1.000000 元" in dispatcher.events[1].markdown
 

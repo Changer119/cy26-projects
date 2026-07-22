@@ -136,7 +136,8 @@ class ScheduledJobs:
         limit = "无" if item.limit_price is None else f"{item.limit_price:.6f}"
         weight = "未知" if item.target_weight is None else f"{item.target_weight:.2%}"
         return (
-            f"- {item.instrument_id}：{action}；当前 {item.current_quantity} 股 → "
+            f"- {item.instrument_id}（{item.instrument_name}）：{action}；"
+            f"当前 {item.current_quantity} 股 → "
             f"目标 {item.target_quantity} 股；目标权重 {weight}；限价 {limit}；"
             f"策略 {item.strategy_version}；状态 {item.status.value}；理由：{item.reason}"
         )

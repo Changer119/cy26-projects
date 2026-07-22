@@ -117,6 +117,7 @@ class ApplicationStore:
             return tuple(
                 PlanDecisionSummary(
                     instrument_id=row.instrument_id,
+                    instrument_name=self._instrument_name(session, row.instrument_id),
                     action=row.action,
                     current_quantity=row.current_quantity,
                     target_quantity=row.target_quantity,
@@ -148,6 +149,13 @@ class ApplicationStore:
                 )
                 for row in rows
             )
+
+    @staticmethod
+    def _instrument_name(session: Session, instrument_id: str) -> str:
+        instrument = session.get(InstrumentRow, instrument_id)
+        if instrument is None:
+            raise ValueError(f"交易提案缺少证券主数据: {instrument_id}")
+        return instrument.name
 
     def save_plan(self, plan: TradePlan) -> None:
         self._repository.save_trade_plan(plan)

@@ -117,3 +117,37 @@ def test_portfolio_snapshot_loads_stop_from_latest_filled_buy(tmp_path: Path) ->
     )
 
     assert snapshot.positions[0].stop_price == Decimal("18.4")
+
+
+def test_plan_decisions_include_instrument_name(tmp_path: Path) -> None:
+    store = ApplicationStore(f"sqlite+pysqlite:///{tmp_path / 'plan-name.db'}")
+    store.initialize()
+    trade_date = date(2026, 7, 15)
+    with store.session() as session, session.begin():
+        session.add(
+            TradePlanRow(
+                id="premarket:2026-07-15",
+                account_id=DEFAULT_ACCOUNT_ID,
+                trade_date=trade_date,
+                decision_asof=datetime(2026, 7, 15, 8, 35, tzinfo=ZoneInfo("Asia/Shanghai")),
+                status=TradePlanStatus.FROZEN,
+            )
+        )
+        session.add(
+            TradeProposalRow(
+                id="proposal:name",
+                trade_plan_id="premarket:2026-07-15",
+                instrument_id="603005.SH",
+                action=TradeAction.HOLD,
+                current_quantity=0,
+                target_quantity=0,
+                delta_quantity=0,
+                limit_price_micros=None,
+                status=ProposalStatus.HOLD,
+                confidence_micros=0,
+            )
+        )
+
+    decisions = store.plan_decisions("premarket:2026-07-15")
+
+    assert decisions[0].instrument_name == "晶方科技"
