@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>清爽一夏·家庭空调扇广告</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/scenes.css" />
+    <script src="assets/vendor/gsap.min.js"></script>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="family-fan-ad"
+      data-start="0"
+      data-duration="15"
+      data-width="1080"
+      data-height="1920"
+    >
+      <section id="scene-1" class="scene scene-family">
+        <img id="s1-bg" class="scene-bg" src="assets/images/family/wide.png" alt="" data-layout-allow-overflow />
+        <div id="s1-wash" class="top-wash" data-layout-ignore></div>
+        <div class="scene-content scene-content--top">
+          <p id="s1-kicker" class="kicker">SUMMER AT HOME · 一家人的松弛时刻</p>
+          <h1 id="s1-title" class="display-title display-title--family">夏日宅家，也能很惬意</h1>
+          <div id="s1-rule" class="accent-rule"></div>
+        </div>
+        <div id="s1-product" class="product-shell product-shell--family" data-layout-ignore>
+          <div id="s1-rotor" class="fan-rotor"></div>
+          <img class="product-image" src="assets/images/product/scene-1.png" alt="白色立式循环扇" />
+          <div class="product-shadow"></div>
+        </div>
+        <svg id="s1-air" class="airflow airflow--family" viewBox="0 0 1080 620" data-layout-ignore>
+          <path class="breeze-line" d="M790 330 C640 245 440 270 135 205" />
+          <path class="breeze-line breeze-line--thin" d="M805 365 C635 335 425 365 85 325" />
+          <path class="breeze-line breeze-line--soft" d="M795 405 C645 450 430 470 175 435" />
+        </svg>
+      </section>
+
+      <section id="scene-2" class="scene scene-product">
+        <div id="s2-halo" class="product-halo" data-layout-ignore></div>
+        <div id="s2-product" class="product-shell product-shell--feature" data-layout-ignore>
+          <div id="s2-rotor" class="fan-rotor fan-rotor--feature"></div>
+          <img class="product-image" src="assets/images/product/scene-2.png" alt="产品特写" />
+          <div class="product-shadow product-shadow--feature"></div>
+        </div>
+        <div class="scene-content scene-content--feature">
+          <div class="feature-copy">
+            <p id="s2-kicker" class="kicker kicker--dark">VISIBLE CONTROL</p>
+            <h2 id="s2-title" class="display-title display-title--feature">轻轻开启，舒适送风</h2>
+            <p id="s2-body" class="body-copy">F3 显示清晰可见，按键状态一目了然。</p>
+            <div id="s2-rule" class="accent-rule accent-rule--dark"></div>
+            <div id="s2-badge" class="feature-badge">
+              <span class="feature-badge__value">F3</span>
+              <span class="feature-badge__label">当前显示</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-3" class="scene scene-clay" data-layout-allow-overlap>
+        <img id="s3-bg" class="scene-bg scene-bg--close" src="assets/images/family/close.png" alt="" data-layout-allow-overflow />
+        <div id="s3-vignette" class="soft-vignette" data-layout-ignore></div>
+        <div class="scene-content scene-content--clay">
+          <div id="s3-copy" class="clay-copy">
+            <p id="s3-kicker" class="kicker kicker--dark">COOL &amp; CREATIVE</p>
+            <h2 id="s3-title" class="display-title display-title--clay">清凉作伴，专心玩耍</h2>
+            <p id="s3-body" class="body-copy body-copy--clay">小小创意，在舒适的陪伴里慢慢长大。</p>
+          </div>
+        </div>
+        <div id="s3-dots" class="clay-dots" data-layout-ignore>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div id="s3-product" class="product-shell product-shell--mini" data-layout-ignore>
+          <div id="s3-rotor" class="fan-rotor fan-rotor--mini"></div>
+          <img class="product-image" src="assets/images/product/scene-3.png" alt="" />
+        </div>
+        <svg id="s3-air" class="airflow airflow--clay" viewBox="0 0 1080 480" data-layout-ignore>
+          <path class="breeze-line" d="M900 285 C760 205 595 215 400 165" />
+          <path class="breeze-line breeze-line--thin" d="M910 330 C765 290 610 305 440 275" />
+        </svg>
+      </section>
+
+      <section id="scene-4" class="scene scene-closing" data-layout-allow-overlap>
+        <img id="s4-bg" class="scene-bg scene-bg--closing" src="assets/images/family/closing.png" alt="" data-layout-allow-overflow />
+        <div id="s4-veil" class="closing-veil" data-layout-ignore></div>
+        <div id="s4-halo" class="closing-halo" data-layout-ignore></div>
+        <div class="scene-content scene-content--closing">
+          <p id="s4-kicker" class="kicker kicker--dark">一家人的清凉时刻</p>
+          <h2 id="s4-title" class="display-title display-title--closing">清爽一夏，舒服在家</h2>
+          <p id="s4-body" class="body-copy body-copy--closing">让轻柔送风，陪着每一次笑声与小小创作。</p>
+          <p id="s4-note" class="legal-note">实际使用体验因环境而异</p>
+        </div>
+        <div id="s4-product" class="product-shell product-shell--hero" data-layout-ignore>
+          <div id="s4-rotor" class="fan-rotor fan-rotor--hero"></div>
+          <img id="s4-product-image" class="product-image" src="assets/images/product/scene-4.png" alt="白色立式循环扇" />
+          <div class="product-shadow product-shadow--hero"></div>
+        </div>
+      </section>
+
+      <audio
+        id="music"
+        class="clip"
+        data-start="0"
+        data-duration="15"
+        data-track-index="10"
+        data-volume="0.92"
+        src="assets/audio/family-ad-bed.wav"
+      ></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Scene 1: family reveal and gentle airflow.
+      tl.from("#s1-bg", { scale: 1.08, opacity: 0, duration: 0.9, ease: "sine.out" }, 0.16);
+      tl.from("#s1-wash", { opacity: 0, duration: 0.55, ease: "power1.out" }, 0.24);
+      tl.from("#s1-kicker", { x: -48, opacity: 0, duration: 0.45, ease: "expo.out" }, 0.34);
+      tl.from("#s1-title", { y: 58, opacity: 0, duration: 0.72, ease: "power3.out" }, 0.48);
+      tl.from("#s1-rule", { scaleX: 0, opacity: 0, duration: 0.38, ease: "back.out(1.4)" }, 0.78);
+      tl.from("#s1-product", { x: 92, y: 42, scale: 0.92, opacity: 0, duration: 0.78, ease: "expo.out" }, 0.58);
+      tl.from("#s1-air", { opacity: 0, duration: 0.5, ease: "sine.out" }, 0.95);
+      tl.fromTo("#s1-air .breeze-line", { strokeDashoffset: 210 }, { strokeDashoffset: -130, duration: 2.1, stagger: 0.11, ease: "sine.inOut" }, 1.02);
+      tl.to("#s1-bg", { scale: 1.035, x: -12, duration: 2.42, ease: "sine.inOut" }, 1.08);
+      tl.to("#s1-rotor", { rotation: 610, duration: 3.0, ease: "none" }, 0.28);
+
+      // Transition 1: calm blur crossfade.
+      tl.to("#scene-1", { filter: "blur(25px)", scale: 1.045, duration: 0.58, ease: "power1.in" }, 3.12);
+      tl.to("#scene-1", { opacity: 0, duration: 0.34, ease: "power1.in" }, 3.5);
+      tl.fromTo("#scene-2", { filter: "blur(25px)", scale: 0.96, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.72, ease: "power1.out" }, 3.42);
+
+      // Scene 2: visible product controls.
+      tl.from("#s2-halo", { scale: 0.55, opacity: 0, duration: 0.82, ease: "sine.out" }, 3.54);
+      tl.from("#s2-product", { x: -115, scale: 0.93, opacity: 0, duration: 0.72, ease: "expo.out" }, 3.62);
+      tl.from("#s2-kicker", { x: 44, opacity: 0, duration: 0.34, ease: "power4.out" }, 3.78);
+      tl.from("#s2-title", { y: 54, opacity: 0, duration: 0.62, ease: "power3.out" }, 3.88);
+      tl.from("#s2-body", { x: 36, opacity: 0, duration: 0.44, ease: "sine.out" }, 4.08);
+      tl.from("#s2-rule", { scaleX: 0, opacity: 0, duration: 0.33, ease: "back.out(1.5)" }, 4.24);
+      tl.from("#s2-badge", { scale: 0.72, rotation: -4, opacity: 0, duration: 0.52, ease: "back.out(1.7)" }, 4.35);
+      tl.to("#s2-rotor", { rotation: 450, duration: 2.35, ease: "none" }, 3.7);
+      tl.to("#s2-halo", { scale: 1.08, duration: 1.6, ease: "sine.inOut" }, 4.38);
+
+      // Transition 2: playful iris into the clay close-up.
+      tl.set("#scene-3", { opacity: 1 }, 5.98);
+      tl.fromTo("#scene-3", { clipPath: "circle(0% at 50% 71%)" }, { clipPath: "circle(120% at 50% 71%)", duration: 0.68, ease: "power2.out" }, 5.98);
+      tl.set("#scene-2", { opacity: 0 }, 6.66);
+
+      // Scene 3: child's clay moment.
+      tl.from("#s3-bg", { scale: 1.09, opacity: 0, duration: 0.86, ease: "sine.out" }, 6.04);
+      tl.from("#s3-vignette", { opacity: 0, duration: 0.48, ease: "power1.out" }, 6.18);
+      tl.from("#s3-copy", { y: -42, opacity: 0, duration: 0.62, ease: "expo.out" }, 6.32);
+      tl.from("#s3-kicker", { x: 38, opacity: 0, duration: 0.34, ease: "power4.out" }, 6.4);
+      tl.from("#s3-title", { letterSpacing: "0.08em", opacity: 0, duration: 0.58, ease: "power2.out" }, 6.48);
+      tl.from("#s3-body", { x: -34, opacity: 0, duration: 0.42, ease: "sine.out" }, 6.68);
+      tl.from("#s3-dots span", { scale: 0, opacity: 0, duration: 0.42, stagger: 0.09, ease: "back.out(1.8)" }, 6.82);
+      tl.from("#s3-product", { x: 54, y: 44, scale: 0.88, opacity: 0, duration: 0.68, ease: "expo.out" }, 6.7);
+      tl.from("#s3-air", { opacity: 0, duration: 0.44, ease: "power1.out" }, 7.2);
+      tl.fromTo("#s3-air .breeze-line", { strokeDashoffset: 170 }, { strokeDashoffset: -120, duration: 2.2, stagger: 0.12, ease: "sine.inOut" }, 7.28);
+      tl.to("#s3-bg", { scale: 1.025, x: -10, duration: 3.2, ease: "sine.inOut" }, 6.92);
+      tl.to("#s3-rotor", { rotation: 470, duration: 3.2, ease: "none" }, 6.8);
+
+      // Transition 3: return to a calm family hero frame.
+      tl.to("#scene-3", { filter: "blur(24px)", scale: 1.04, duration: 0.58, ease: "power1.in" }, 10.12);
+      tl.to("#scene-3", { opacity: 0, duration: 0.34, ease: "power1.in" }, 10.48);
+      tl.fromTo("#scene-4", { filter: "blur(24px)", scale: 0.96, opacity: 0 }, { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.72, ease: "power1.out" }, 10.38);
+
+      // Scene 4: product hero and closing message.
+      tl.from("#s4-bg", { scale: 1.09, opacity: 0, duration: 0.88, ease: "sine.out" }, 10.46);
+      tl.from("#s4-veil", { opacity: 0, duration: 0.5, ease: "power1.out" }, 10.52);
+      tl.from("#s4-halo", { scale: 0.55, opacity: 0, duration: 0.92, ease: "sine.out" }, 10.62);
+      tl.from("#s4-product", { x: 88, y: 70, scale: 0.9, opacity: 0, duration: 0.78, ease: "expo.out" }, 10.7);
+      tl.from("#s4-kicker", { x: -45, opacity: 0, duration: 0.38, ease: "power4.out" }, 10.82);
+      tl.from("#s4-title", { y: 62, opacity: 0, duration: 0.72, ease: "power3.out" }, 10.94);
+      tl.from("#s4-body", { x: -32, opacity: 0, duration: 0.48, ease: "sine.out" }, 11.18);
+      tl.from("#s4-note", { y: 28, opacity: 0, duration: 0.42, ease: "back.out(1.35)" }, 11.46);
+      tl.to("#s4-bg", { scale: 1.025, x: -14, duration: 3.15, ease: "sine.inOut" }, 11.36);
+      tl.to("#s4-rotor", { rotation: 600, duration: 4.0, ease: "none" }, 10.76);
+      tl.fromTo("#s4-product-image", { filter: "brightness(0.96)" }, { filter: "brightness(1.08)", duration: 0.38, ease: "power1.out" }, 12.52);
+      tl.to("#s4-product-image", { filter: "brightness(1)", duration: 0.62, ease: "sine.inOut" }, 12.9);
+
+      window.__timelines["family-fan-ad"] = tl;
+    </script>
+  </body>
+</html>

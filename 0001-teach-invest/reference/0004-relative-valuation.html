@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参考卡：相对估值速查表</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  body { font-size: 17px; }
+  .page { max-width: 780px; }
+  .fill { border-bottom: 1px solid var(--rule); display: inline-block; min-width: 3rem; height: 1.4em; }
+  @media print {
+    body { padding: 0.5rem; background: #fff; color: #000; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kicker">参考卡 · Reference</div>
+  <h1>相对估值速查表</h1>
+  <p class="lede">来自 <a href="../lessons/0004-relative-valuation.html">课程 0004：估值入门</a>。判断"贵不贵"，永远是<strong>跟自己的历史比 + 跟同行比</strong>，不是看跌了多少、也不是看倍数本身的绝对高低。</p>
+
+  <h2>两个基础倍数</h2>
+  <table>
+    <thead><tr><th>指标</th><th>公式</th><th>适合什么公司</th><th>局限</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>市盈率 PE</strong></td>
+        <td>总市值 ÷ 净利润<br>（或 股价 ÷ 每股盈利）</td>
+        <td>盈利稳定为正的公司</td>
+        <td>公司亏损时 PE 为负或失去意义</td>
+      </tr>
+      <tr>
+        <td><strong>市销率 PS</strong></td>
+        <td>总市值 ÷ 营业收入</td>
+        <td>暂时亏损、利润不稳定的成长型公司（很多新能源车企早期阶段）</td>
+        <td>不反映利润率和负债——两家 PS 相同，毛利率可能天差地别</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>相对估值三步法</h2>
+  <p>1. 算出目标公司现在的 PE 或 PS（用亏损/利润不稳定就用 PS）。<br>
+     2. 跟它自己过去 1-3 年的倍数区间比较：现在是历史低位、中位还是高位？<br>
+     3. 跟 2-3 家最直接的同行比较：现在比同行贵还是便宜？</p>
+  <p>只有当"现在的倍数明显低于自身历史区间、也低于同行"这两条都成立时，"便宜"才有估值层面的支撑——而不是仅仅因为股价从高点跌了很多。</p>
+
+  <div class="callout warn">
+    <div class="label">练习：填一份理想汽车的相对估值</div>
+    <p>这个周末，从雪球 / 公司财报 / 行情软件上查真实数据，填进下表（不要用记忆或猜测的数字）：</p>
+    <table>
+      <thead><tr><th></th><th>当前 PE/PS</th><th>近 1-3 年区间</th><th>处于区间什么位置</th></tr></thead>
+      <tbody>
+        <tr><td>理想汽车-W</td><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td></tr>
+        <tr><td>蔚来 / 小鹏（同行 A）</td><td><span class="fill"></span></td><td>—</td><td>—</td></tr>
+        <tr><td>比亚迪（同行 B）</td><td><span class="fill"></span></td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-bottom:0">填完发给我，我们一起看这些数字说明了什么——但最终买不买、买多少，仍然是你自己的决定，我不做具体的买卖判断。</p>
+  </div>
+
+  <div class="callout source">
+    <div class="label">来源</div>
+    <a href="https://pages.stern.nyu.edu/~adamodar/pdfiles/execval/relval.pdf">Damodaran, "Relative Valuation"</a>（英文讲义）· <a href="https://zh.wikipedia.org/zh-hans/%E5%B8%82%E9%94%80%E7%8E%87">维基百科：市销率</a>
+  </div>
+
+  <div class="callout warn">
+    <div class="label">陷阱：警惕"板块整体重估"</div>
+    <p style="margin-bottom:0">如果一只股票"跟自己历史比"极度便宜，但"跟同行比"只是平均水平——很可能不是这家公司被错杀，而是<strong>整个板块一起从泡沫价回落</strong>。这种情况下，"跌了很多"解释的是板块重新定价，不是这家公司相对同行有多划算。两步比较结果不一致时，同行比较的权重应该更高——历史区间容易被某一年的泡沫拉高，扭曲整个基准线。</p>
+  </div>
+
+  <div class="nav-footer no-print">
+    <span>← <a href="../lessons/0004-relative-valuation.html">返回课程 0004</a></span>
+    <span>股票投资教学工作区</span>
+  </div>
+</div>
+</body>
+</html>

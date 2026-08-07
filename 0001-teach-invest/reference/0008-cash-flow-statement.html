@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参考卡：现金流量表速查卡</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  body { font-size: 17px; }
+  .page { max-width: 760px; }
+  .flow { font-family: var(--mono); font-size: 1rem; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.2rem 1.4rem; margin: 1.2rem 0; text-align: center; }
+  .fill { border-bottom: 1px solid var(--rule); display: inline-block; min-width: 3rem; height: 1.4em; }
+  @media print {
+    body { padding: 0.5rem; background: #fff; color: #000; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kicker">参考卡 · Reference</div>
+  <h1>现金流量表速查卡</h1>
+  <p class="lede">来自 <a href="../lessons/0008-cash-flow-statement.html">课程 0008：读懂现金流量表</a>。利润表回答"赚不赚钱"，资产负债表回答"欠多少钱够不够还"，这张表回答"赚的钱是不是真金白银"。</p>
+
+  <table>
+    <thead><tr><th>类别</th><th>记录什么</th></tr></thead>
+    <tbody>
+      <tr><td>经营活动</td><td>主营业务日常收付——最核心的一项，衡量主业本身能不能自己造血</td></tr>
+      <tr><td>投资活动</td><td>买卖固定资产、厂房设备、股权投资</td></tr>
+      <tr><td>筹资活动</td><td>借款/还款、发股票、分红、回购</td></tr>
+    </tbody>
+  </table>
+
+  <div class="flow">自由现金流　=　经营活动现金流量净额　−　资本开支</div>
+
+  <div class="callout warn">
+    <div class="label">核心检查：经营现金流 vs 净利润</div>
+    <p style="margin-bottom:0.4rem">健康信号：经营活动现金流量净额长期<strong>接近或高于净利润</strong>——账面利润大部分真的变成了现金。</p>
+    <p style="margin-bottom:0">警示信号：净利润常年为正，经营现金流却常年为负或明显偏低——可能是应收账款/存货堆积，甚至财务造假。"利润是观点，现金是事实"。</p>
+  </div>
+
+  <div class="callout warn">
+    <div class="label">练习：晶方科技三年现金流体检</div>
+    <table>
+      <thead><tr><th>年度</th><th>经营现金流净额</th><th>净利润</th><th>资本开支</th><th>自由现金流</th></tr></thead>
+      <tbody>
+        <tr><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td></tr>
+        <tr><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td></tr>
+        <tr><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td><td><span class="fill"></span></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-bottom:0">资本开支对应报表里"购建固定资产、无形资产和其他长期资产支付的现金"一行。填完发给我，一起看三张报表的完整结论。</p>
+  </div>
+
+  <div class="callout source">
+    <div class="label">来源</div>
+    《巴菲特教你读财报》现金流量表部分（第 50-52 章）。
+  </div>
+
+  <div class="nav-footer no-print">
+    <span>← <a href="../lessons/0008-cash-flow-statement.html">返回课程 0008</a></span>
+    <span>股票投资教学工作区</span>
+  </div>
+</div>
+</body>
+</html>

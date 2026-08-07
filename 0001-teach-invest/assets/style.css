@@ -1,0 +1,275 @@
+/* 股票投资教学工作区 — 共享样式
+   Tufte 式排版：宽松的行距、克制的配色、清晰的层级 */
+
+:root {
+  --bg: #fbfaf7;
+  --bg-card: #ffffff;
+  --ink: #1c1a17;
+  --ink-soft: #55504a;
+  --ink-faint: #8a8478;
+  --accent: #8a3b2f;
+  --accent-soft: #c98d7f;
+  --rule: #ddd6cb;
+  --good: #2f6b4f;
+  --bad: #a4362a;
+  --serif: "Songti SC", "STSong", "Noto Serif SC", "Georgia", serif;
+  --sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", -apple-system, sans-serif;
+  --mono: "SF Mono", "Menlo", "Consolas", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171614;
+    --bg-card: #201f1c;
+    --ink: #ece7de;
+    --ink-soft: #b8b1a4;
+    --ink-faint: #797365;
+    --accent: #d98a72;
+    --accent-soft: #8a5344;
+    --rule: #3a362f;
+    --good: #6fbf94;
+    --bad: #e08072;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 3rem 1.5rem 6rem;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 2.1rem;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-family: var(--sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 2.8rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.6rem 0 0.6rem;
+}
+
+p { margin: 0 0 1.1rem; }
+
+.lede {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+}
+
+a { color: var(--accent); text-decoration-color: var(--accent-soft); }
+a:hover { text-decoration-thickness: 2px; }
+
+.byline {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  margin-bottom: 2.5rem;
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.2rem 0 0.2rem 1.2rem;
+  border-left: 3px solid var(--accent-soft);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.callout {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.2rem 1.4rem;
+  margin: 1.6rem 0;
+}
+
+.callout.warn { border-left: 4px solid var(--bad); }
+.callout.tip { border-left: 4px solid var(--good); }
+.callout.source { border-left: 4px solid var(--accent); }
+
+.callout .label {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.4rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+th {
+  font-weight: 700;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pill {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+}
+
+.exercise {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.4rem 1.5rem;
+  margin: 1.6rem 0;
+}
+
+.exercise .label {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.quiz-q {
+  margin-bottom: 1.6rem;
+}
+
+.quiz-q .prompt {
+  font-family: var(--sans);
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-option {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+  color: var(--ink);
+  transition: border-color 0.15s ease;
+}
+
+.quiz-option:hover { border-color: var(--accent-soft); }
+
+.quiz-option.correct {
+  border-color: var(--good);
+  background: color-mix(in srgb, var(--good) 12%, var(--bg));
+}
+
+.quiz-option.incorrect {
+  border-color: var(--bad);
+  background: color-mix(in srgb, var(--bad) 12%, var(--bg));
+}
+
+.quiz-feedback {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  margin-top: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  display: none;
+}
+
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: color-mix(in srgb, var(--good) 14%, var(--bg)); color: var(--good); }
+.quiz-feedback.incorrect { background: color-mix(in srgb, var(--bad) 14%, var(--bg)); color: var(--bad); }
+
+.nav-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.ask-agent {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  background: var(--bg-card);
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 2.5rem 0 0;
+}
+
+.ask-agent .label {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--bg-card);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}

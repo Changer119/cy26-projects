@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参考卡：仓位管理速查卡</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  body { font-size: 17px; }
+  .page { max-width: 760px; }
+  .fill { border-bottom: 1px solid var(--rule); display: inline-block; min-width: 3rem; height: 1.4em; }
+  @media print {
+    body { padding: 0.5rem; background: #fff; color: #000; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kicker">参考卡 · Reference</div>
+  <h1>仓位管理速查卡</h1>
+  <p class="lede">来自 <a href="../lessons/0005-position-sizing.html">课程 0005：仓位管理入门</a>。分析做对了不够——仓位太大，一次判断失误也能重创账户。</p>
+
+  <h2>三条起步规则</h2>
+  <table>
+    <thead><tr><th>层级</th><th>建议上限</th></tr></thead>
+    <tbody>
+      <tr><td>单只个股</td><td>不超过总资金的 10%-20%</td></tr>
+      <tr><td>单一行业/板块</td><td>不超过总资金的 30%-40%</td></tr>
+      <tr><td>持仓数量（新手起步）</td><td>3-5 只，分布在不同行业</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <div class="label">"两只股票"不等于"分散"</div>
+    判断是否分散，看的不是持仓数量，而是<strong>它们会不会同涨同跌</strong>。同一产业链上下游的两只标的（比如半导体个股 + 半导体设备基金），本质是同一个风险敞口下的两次加注，行业一有风吹草动，两边一起承压——这不是分散，是加倍集中。
+  </div>
+
+  <h2>买入前，填一下这张表</h2>
+  <table>
+    <thead><tr><th></th><th>占总资金比例</th><th>所属行业</th></tr></thead>
+    <tbody>
+      <tr><td>本次拟买入标的</td><td><span class="fill"></span></td><td><span class="fill"></span></td></tr>
+      <tr><td>账户内其他持仓 1</td><td><span class="fill"></span></td><td><span class="fill"></span></td></tr>
+      <tr><td>账户内其他持仓 2</td><td><span class="fill"></span></td><td><span class="fill"></span></td></tr>
+    </tbody>
+  </table>
+  <p>检查：单只是否超过 10%-20%？同一行业合计是否超过 30%-40%？任何一项超了，先减小这笔仓位，而不是事后再说。</p>
+
+  <div class="callout source">
+    <div class="label">来源</div>
+    Statman (1987), <a href="https://www.researchgate.net/publication/227406059_How_Many_Stocks_Make_a_Diversified_Portfolio">"How Many Stocks Make a Diversified Portfolio?"</a> —— 严谨的学术答案是 30-40 只随机个股才能充分分散非系统性风险，但这对刚起步、资金有限的新手并不现实，上面的三条是更实用的起步规则，会随着经验和资金增长逐步向学术答案靠拢。
+  </div>
+
+  <h2>资金太小，凑不够一手怎么办？</h2>
+  <p>10%-20% 假设账户大到能"整除"。资金小的时候比例卡在"一手"的门槛上，是正常现象，不是你做错了。真正的标尺应该从"精确的百分比"换成"这笔钱亏光会不会打乱我的判断/生活"——能接受就可以买，不能接受说明现在这个仓位对你还是太大。</p>
+
+  <h2>会不会分散到最后赚不到钱？——Diworsification</h2>
+  <p>彼得·林奇造了"diworsification"（分散到变差）这个词：为了分散而分散，拿了一堆没认真研究过的股票，研究深度被摊薄，业绩反而更差。<sup>[2]</sup> 巴菲特 1993 年致股东信说得更直接：<em>"如果你是懂生意的投资者，能找到 5-10 家定价合理、有长期竞争优势的公司，常规意义上的分散化对你没有意义，只会拖累收益、增加风险。"</em><sup>[3]</sup></p>
+  <p><strong>分散降低的是风险，不是提高收益。</strong>更现实的做法是<strong>核心-卫星结构</strong>：大部分资金放指数基金（天然分散，负责拿市场平均收益），小部分资金放你真正用检查清单深入分析过的少数个股（负责博取超额收益）——不用在同一笔钱里同时追求"又分散又集中"。</p>
+
+  <div class="callout source">
+    <div class="label">补充来源</div>
+    [2] Peter Lynch, <em>One Up On Wall Street</em> —— "diworsification" 概念的出处。<br>
+    [3] Warren Buffett, 1993 Berkshire Hathaway 致股东信。
+  </div>
+
+  <div class="nav-footer no-print">
+    <span>← <a href="../lessons/0005-position-sizing.html">返回课程 0005</a></span>
+    <span>股票投资教学工作区</span>
+  </div>
+</div>
+</body>
+</html>

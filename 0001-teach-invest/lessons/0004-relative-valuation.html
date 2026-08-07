@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程 0004：估值入门</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="page">
+  <div class="kicker">课程 0004 · 估值方法</div>
+  <h1>估值入门：为什么"跌了很多"不等于"便宜"</h1>
+  <p class="lede">你打算周一买入理想汽车，理由是"太便宜了，已经腰斩了"。这一课要把这句话拆开看——"腰斩"到底告诉了你什么，又漏掉了什么。目标是让你能真正回答买入检查清单第 3 项："这个价格贵不贵"。</p>
+  <p class="byline">阅读约 12 分钟 · 承接课程 <a href="0003-buy-checklist.html">0003：买入前检查清单</a></p>
+
+  <h2>1. "腰斩"是同一个偏差的另一面</h2>
+  <p>课程 0002 讲过：你把基金的历史最高点（100% 浮盈）当成参照点，导致跌到 50-60% 时感觉"亏了"，即便实际仍是巨额盈利——这是<strong>锚定效应</strong>。</p>
+  <p>"理想汽车腰斩了所以便宜"，用的是同一个参照系，只是方向反过来了：你把股票<strong>自己的历史最高价</strong>当成了"应该值多少"的锚，股价现在只有当时的一半，于是感觉"便宜"。但历史最高价从来不是公司真实价值的度量——它可能本身就偏高（泡沫价），跌到一半可能只是从"很贵"跌到"没那么贵"，离"真正便宜"还差得远。</p>
+
+  <div class="callout warn">
+    <div class="label">"跌了很多"能告诉你的，和不能告诉你的</div>
+    <p style="margin-bottom:0.4rem"><strong>能告诉你：</strong>市场情绪变了，价格波动很大。</p>
+    <p style="margin-bottom:0"><strong>不能告诉你：</strong>现在这个价格，相对公司的盈利/收入，到底算贵还是便宜。要回答这个问题，跌幅本身给不了答案，需要换一套方法。</p>
+  </div>
+
+  <h2>2. 两个最基础的估值倍数</h2>
+  <p><strong>市盈率（PE）</strong> = 总市值 ÷ 净利润。含义是"按现在的利润水平，多少年能回本"。前提是公司要有稳定的正盈利——利润为负时 PE 会失真甚至失去意义。</p>
+  <p><strong>市销率（PS）</strong> = 总市值 ÷ 营业收入。很多新能源车企在扩张期利润薄甚至亏损，PE 用不了，这时候营收通常还是正的，PS 就成了更常用的替代指标。<sup>[1]</sup> 缺点是它不反映利润率和负债——两家公司 PS 都是 5 倍，一家毛利率 80%、一家 20%，含金量完全不同，不能只看这一个数字。</p>
+
+  <h2>3. 判断贵不贵：相对估值三步法</h2>
+  <p>估值权威学者 Aswath Damodaran 把这类方法统称为<strong>相对估值</strong>：不孤立地看一个倍数高不高，而是拿它跟参照系比较。<sup>[2]</sup> 具体三步：</p>
+  <ol>
+    <li>算出现在的 PE 或 PS（利润不稳定就用 PS）</li>
+    <li>跟公司<strong>自己过去 1-3 年</strong>的倍数区间比较——现在是历史低位、中位还是高位？</li>
+    <li>跟<strong>2-3 家最直接的同行</strong>比较——现在比同行贵还是便宜？</li>
+  </ol>
+  <p>只有当"低于自身历史区间"和"低于同行"这两条<strong>同时成立</strong>，"便宜"才有估值层面的依据——而不是仅凭股价从高点跌了多少。</p>
+
+  <div class="exercise">
+    <div class="label">练习：给理想汽车做一次相对估值</div>
+    <p>打开参考卡，这个周末从雪球或公司财报上查<strong>真实数据</strong>（不要凭记忆估），填三格：理想汽车现在的 PE/PS、近 1-3 年区间、以及蔚来/小鹏/比亚迪的对应数字。</p>
+    <p style="margin-bottom:0">填完发给我，我们一起看这些数字说明了什么——但要不要买、买多少，仍然是你自己的决定；我帮你核对方法用得对不对，不做具体的买卖判断。</p>
+  </div>
+
+  <h2>4. 检验一下</h2>
+
+  <div class="quiz-q">
+    <div class="prompt">Q1. "理想汽车跌了很多，所以便宜"——这个判断逻辑上的问题是什么？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">只跟自己股价历史比较</button>
+      <button class="quiz-option" data-correct="false">完全没有查过任何数据</button>
+      <button class="quiz-option" data-correct="false">用了错误的市盈率公式</button>
+      <button class="quiz-option" data-correct="false">混淆了市销率和市净率</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 参照系是股价自己的历史高点，没有跟盈利/收入或同行比较。" data-incorrect-text="再想想：问题出在'拿什么当参照系'来判断便宜。"></div>
+  </div>
+
+  <div class="quiz-q">
+    <div class="prompt">Q2. 一家公司暂时亏损、利润不稳定，通常更适合用哪个指标估值？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="false">市盈率</button>
+      <button class="quiz-option" data-correct="true">市销率</button>
+      <button class="quiz-option" data-correct="false">市净率</button>
+      <button class="quiz-option" data-correct="false">股息率</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 营收通常还是正的，市销率不受亏损影响。" data-incorrect-text="再想想：哪个指标的分母在公司亏损时依然有意义？"></div>
+  </div>
+
+  <div class="quiz-q">
+    <div class="prompt">Q3. 判断一只股票现在贵不贵，最可靠的方法是？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">跟自身历史和同行比较</button>
+      <button class="quiz-option" data-correct="false">只看今年以来股价涨跌</button>
+      <button class="quiz-option" data-correct="false">只看是否创下历史新高</button>
+      <button class="quiz-option" data-correct="false">只看今天成交量的大小</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 这正是相对估值法的核心：跟自己历史比，跟同行比。" data-incorrect-text="再想想：单看价格走势或成交量，回答不了'贵不贵'这个问题。"></div>
+  </div>
+
+  <h2>5. 推荐阅读</h2>
+  <div class="callout source">
+    <div class="label">主要来源</div>
+    <p style="margin-bottom:0.4rem">[1] <a href="https://zh.wikipedia.org/zh-hans/%E5%B8%82%E9%94%80%E7%8E%87">维基百科：市销率</a> —— PS 指标的定义与适用场景。</p>
+    <p style="margin-bottom:0">[2] Aswath Damodaran, <a href="https://pages.stern.nyu.edu/~adamodar/pdfiles/execval/relval.pdf">"Relative Valuation"</a>（英文讲义）—— 相对估值法的权威一手资料。</p>
+  </div>
+
+  <div class="ask-agent">
+    <span class="label">随时提问：</span> 查数据时如果不确定该看哪个指标、或者两个同行选谁做对比更合理，随时问我。填完参考卡的表格后发给我，我们一起核对。
+  </div>
+
+  <div class="nav-footer">
+    <span>← <a href="0003-buy-checklist.html">课程 0003</a> · 参考：<a href="../reference/0004-relative-valuation.html">相对估值速查表</a></span>
+    <span>下一课：待定 —— 取决于你带回来的估值数据</span>
+  </div>
+</div>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参考卡：资产负债表速查卡</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  body { font-size: 17px; }
+  .page { max-width: 760px; }
+  .flow { font-family: var(--mono); font-size: 1rem; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 8px; padding: 1.2rem 1.4rem; margin: 1.2rem 0; text-align: center; }
+  @media print {
+    body { padding: 0.5rem; background: #fff; color: #000; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kicker">参考卡 · Reference</div>
+  <h1>资产负债表速查卡</h1>
+  <p class="lede">来自 <a href="../lessons/0007-balance-sheet.html">课程 0007：读懂资产负债表</a>。利润表回答"赚不赚钱"，这张表回答"会不会因为还不上债突然倒下"。</p>
+
+  <div class="flow">资产　=　负债　+　股东权益</div>
+
+  <table>
+    <thead><tr><th>类别</th><th>包含什么</th></tr></thead>
+    <tbody>
+      <tr><td>流动资产</td><td>现金、应收账款、存货——一年内能变现的</td></tr>
+      <tr><td>非流动资产</td><td>固定资产、无形资产、商誉、长期投资——不容易短期变现的</td></tr>
+      <tr><td>流动负债</td><td>一年内要还的债</td></tr>
+      <tr><td>非流动负债</td><td>长期借款等</td></tr>
+      <tr><td>股东权益</td><td>资产减去负债，真正属于股东的部分</td></tr>
+    </tbody>
+  </table>
+
+  <h2>两个核心比率</h2>
+  <table>
+    <thead><tr><th>指标</th><th>公式</th><th>参考标准</th></tr></thead>
+    <tbody>
+      <tr><td>流动比率</td><td>流动资产 ÷ 流动负债</td><td>理论上 2:1 较健康，衡量能否应付短期要还的钱</td></tr>
+      <tr><td>资产负债率</td><td>总负债 ÷ 总资产</td><td>越低越安全，直接衡量课程 0003 提到的"杠杆"风险</td></tr>
+    </tbody>
+  </table>
+
+  <div class="flow">商誉　=　收购支付的价格　−　被收购公司可辨认净资产的公允价值</div>
+
+  <div class="callout warn">
+    <div class="label">额外警示信号：商誉占比</div>
+    <p style="margin-bottom:0.4rem">商誉是并购时多付的溢价形成的资产，不是现金，不能拿去还债、也不创造现金流——它的价值全靠一个假设：被收购公司未来能赚出与收购价匹配的利润。</p>
+    <p style="margin-bottom:0">一旦假设落空，就要计提<strong>商誉减值</strong>，直接冲击当期利润和净资产（2018 年报季 A 股 871 家公司合计减值 1658.6 亿元）。两个关键比例：<strong>商誉 ÷ 总资产</strong>（依赖并购扩张的程度）、<strong>商誉 ÷ 股东权益</strong>（减值归零会削掉多少净资产）。</p>
+  </div>
+
+  <div class="callout source">
+    <div class="label">来源</div>
+    玛丽·巴菲特 & 戴维·克拉克，《巴菲特教你读财报》资产负债表部分；Mohnish Pabrai 检查清单（课程 0003）："投资失败的头号原因是杠杆"；<a href="https://finance.sina.com.cn/roll/2019-05-02/doc-ihvhiqax6259114.shtml">2018年A股商誉减值数据，新浪财经</a>。
+  </div>
+
+  <div class="nav-footer no-print">
+    <span>← <a href="../lessons/0007-balance-sheet.html">返回课程 0007</a></span>
+    <span>股票投资教学工作区</span>
+  </div>
+</div>
+</body>
+</html>

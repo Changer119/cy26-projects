@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程 0005：仓位管理入门</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="page">
+  <div class="kicker">课程 0005 · 风险控制</div>
+  <h1>仓位管理入门：一笔投资该占多少仓位？</h1>
+  <p class="lede">买入前检查清单的第 6 项"仓位比例"，在你上次的作业里是唯一没填的一项。这一课把它补上——而且会重新解释一下，你之前那次晶方科技 + 半导体设备基金账户盈亏归零的经历，问题其实不只是"没设卖出规则"，还有一层是仓位没管好。</p>
+  <p class="byline">阅读约 10 分钟 · 承接课程 <a href="0004-relative-valuation.html">0004：估值入门</a></p>
+
+  <h2>1. 分析做对了，仓位太大照样受伤</h2>
+  <p>买入前检查清单的前 5 项（商业本质、买入理由、估值、安全边际、卖出规则）都是在回答"这笔投资值不值得做"。但即便全部做对，还有一个独立的问题没回答：<strong>这笔钱该占你总资金的多少？</strong>如果一个正确的判断只投入了 5%，判断失误了也伤不到根本；如果投入了 80%，哪怕判断本身没错，一次系统性下跌也可能让你被迫在低位割肉。仓位管理是分析能力之外的第二道防线。</p>
+
+  <h2>2. 重新看一眼你的旧仓位：两只不是两只</h2>
+  <p>晶方科技是半导体封装测试相关公司，半导体设备基金投的是半导体设备产业链——两者本质上是<strong>同一条产业链上的两次下注</strong>。行业景气度一旦转向，两边大概率一起承压、一起下跌。你当时看到"账户总盈亏趋近于 0"而恐慌清仓（见课程 0003），表面看是两笔独立操作互相抵消，实际上是<strong>同一个风险敞口被加倍放大后，一起剧烈波动</strong>。持有两只股票，不等于做到了分散——分散看的不是数量，是它们会不会同涨同跌。</p>
+
+  <h2>3. 三条起步规则</h2>
+  <p>严谨的学术答案来自 Meir Statman 1987 年的经典研究：要充分分散掉非系统性风险，组合大约需要 30-40 只随机个股。<sup>[1]</sup> 这个数字对刚起步、资金有限的你并不现实——下面是更实用的起步版本：</p>
+
+  <table>
+    <thead><tr><th>层级</th><th>建议上限</th></tr></thead>
+    <tbody>
+      <tr><td>单只个股</td><td>不超过总资金的 10%-20%</td></tr>
+      <tr><td>单一行业/板块</td><td>不超过总资金的 30%-40%</td></tr>
+      <tr><td>持仓数量（新手起步）</td><td>3-5 只，分布在不同行业</td></tr>
+    </tbody>
+  </table>
+
+  <p>完整版见参考卡：<a href="../reference/0005-position-sizing.html">仓位管理速查卡 →</a></p>
+
+  <div class="callout tip">
+    <div class="label">这不是死规定</div>
+    这三条是起点，不是天花板也不是地板。随着你分析能力和风险承受力的提升，具体数字可以调整——但"设一个上限、写下来、买入前检查一遍"这个习惯，比具体数字是多少更重要。
+  </div>
+
+  <div class="exercise">
+    <div class="label">练习：给明天的理想汽车定一个仓位上限</div>
+    <p>你现在是空仓状态，账户里没有其他持仓。按"单只个股不超过总资金 10%-20%"这条规则，算一下：如果按上限买入，理想汽车最多应该占用你总投资资金的多少？把这个百分比换算成具体金额，和你原计划打算投入的金额比一下——是超了，还是在范围内？</p>
+    <p style="margin-bottom:0">算完告诉我这个百分比和金额，我们看看是不是需要调整。</p>
+  </div>
+
+  <h2>4. 检验一下</h2>
+
+  <div class="quiz-q">
+    <div class="prompt">Q1. 晶方科技和半导体设备基金同时下跌，最根本的原因是什么？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">两者都属于同一产业链</button>
+      <button class="quiz-option" data-correct="false">两者都是热门概念股票</button>
+      <button class="quiz-option" data-correct="false">两者的止损线设置太低</button>
+      <button class="quiz-option" data-correct="false">两者都没有认真做分析</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 同一产业链景气度转向时，两边大概率一起承压。" data-incorrect-text="再想想：问题出在'这两个东西的风险来源是不是同一个'。"></div>
+  </div>
+
+  <div class="quiz-q">
+    <div class="prompt">Q2. 新手仓位管理里，比较常见的"单只个股上限"建议大概是多少？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">10%-20%</button>
+      <button class="quiz-option" data-correct="false">40%-50%</button>
+      <button class="quiz-option" data-correct="false">60%-70%</button>
+      <button class="quiz-option" data-correct="false">80%-90%</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 这是比较常见的起步区间，具体可随经验调整。" data-incorrect-text="再想想：单只个股的上限应该留出足够空间应对判断失误。"></div>
+  </div>
+
+  <div class="quiz-q">
+    <div class="prompt">Q3. 为什么"持有两只股票"不等于"做到了分散"？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">很可能两者同属一行业</button>
+      <button class="quiz-option" data-correct="false">交易手续费会更加昂贵</button>
+      <button class="quiz-option" data-correct="false">需要花更多时间去盯盘</button>
+      <button class="quiz-option" data-correct="false">卖出时手续更加复杂化</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 分散看的是风险来源是否独立，不是持仓数量。" data-incorrect-text="再想想：这几只股票会不会因为同一个原因一起涨跌？"></div>
+  </div>
+
+  <h2>5. 推荐阅读</h2>
+  <div class="callout source">
+    <div class="label">主要来源</div>
+    <p style="margin-bottom:0">[1] Statman, M. (1987), <a href="https://www.researchgate.net/publication/227406059_How_Many_Stocks_Make_a_Diversified_Portfolio">"How Many Stocks Make a Diversified Portfolio?"</a>, <em>Journal of Financial and Quantitative Analysis</em> —— 分散投资所需持仓数量的经典学术研究。</p>
+  </div>
+
+  <div class="ask-agent">
+    <span class="label">随时提问：</span> 算完仓位上限的练习后告诉我具体数字；如果对"要不要现在就买"还有犹豫，也可以把你的全部顾虑列出来，我们一起过一遍前五课学的东西，看看还有没有没覆盖到的地方。
+  </div>
+
+  <div class="nav-footer">
+    <span>← <a href="0004-relative-valuation.html">课程 0004</a> · 参考：<a href="../reference/0005-position-sizing.html">仓位管理速查卡</a></span>
+    <span>下一课：待定 —— 取决于你的反馈</span>
+  </div>
+</div>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

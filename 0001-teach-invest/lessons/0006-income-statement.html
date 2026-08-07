@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程 0006：读懂利润表</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="page">
+  <div class="kicker">课程 0006 · 财报入门</div>
+  <h1>读懂利润表：收入、毛利率、净利润</h1>
+  <p class="lede">晶方科技当初的买入理由是"利润率高"——但那时候你是真的翻过财报算出来的，还是凭印象？这一课教你把这句话变成一个可以自己动手验证的判断，这也是使命里"看懂三张财务报表"的第一张。</p>
+  <p class="byline">阅读约 12 分钟 · 承接课程 <a href="0005-position-sizing.html">0005：仓位管理入门</a></p>
+
+  <h2>1. 利润表长什么样</h2>
+  <p>利润表回答一个问题：这家公司这段时间赚了多少钱，钱是怎么一步步"漏"下来的。从上到下：</p>
+
+  <table>
+    <thead><tr><th>项目</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td>营业收入</td><td>卖产品/服务收到的钱，公司规模的起点</td></tr>
+      <tr><td>− 营业成本</td><td>直接生产这些产品/服务花掉的钱（原材料、生产人工等）</td></tr>
+      <tr><td>= 毛利</td><td>收入减去直接成本后剩下的部分</td></tr>
+      <tr><td>− 销售/管理/研发费用</td><td>卖货、管理公司、搞研发花的钱</td></tr>
+      <tr><td>− 利息费用</td><td>借债要付的利息</td></tr>
+      <tr><td>= 税前利润 − 所得税</td><td>交税前后的利润</td></tr>
+      <tr><td>= 净利润</td><td>最终真正属于股东的钱</td></tr>
+    </tbody>
+  </table>
+
+  <p>两个最常用的比率：<strong>毛利率 = 毛利 ÷ 营业收入</strong>（每卖 100 元东西，扣掉直接成本还剩多少），<strong>净利率 = 净利润 ÷ 营业收入</strong>（每卖 100 元东西，最后真正落进股东口袋的有多少）。</p>
+
+  <h2>2. 巴菲特的三条筛选标准</h2>
+  <p>《巴菲特教你读财报》里，玛丽·巴菲特和戴维·克拉克总结了巴菲特分析利润表时最看重的几个信号：<sup>[1]</sup></p>
+
+  <table>
+    <thead><tr><th>指标</th><th>标准</th><th>意味着什么</th></tr></thead>
+    <tbody>
+      <tr><td>毛利率</td><td>≥ 40%，且近 10 年保持稳定</td><td>有定价权/护城河，不靠打价格战竞争</td></tr>
+      <tr><td>销售+管理费用 ÷ 营业收入</td><td>&lt; 30% 较好</td><td>费用控制能力强</td></tr>
+      <tr><td>净利率</td><td>≥ 20% 优质，&lt; 10% 通常是过度竞争行业</td><td>真正能落到手里的盈利能力（例：穆迪 31%、可口可乐 21%）</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>关键不是某一年达标，而是能不能连续多年保持</strong>——一年毛利率高可能只是运气好或者一次性因素，连续 10 年保持在 40% 以上，才说明这家公司有其他公司抢不走的东西（护城河）。</p>
+
+  <div class="callout warn">
+    <div class="label">回头看晶方科技</div>
+    你当初说"利润率比较高"，但这句话没有回答三个问题：说的是毛利率还是净利率？只看了一年还是过去几年的趋势？这个数字是自己算出来的，还是凭印象？这一课练习就是把这三个问题真正补上。
+  </div>
+
+  <div class="exercise">
+    <div class="label">练习：给晶方科技算一次真实的毛利率和净利率</div>
+    <p>去雪球或公司年报，找到晶方科技最近 3 年的利润表，把每年的营业收入、毛利、净利润记下来，自己算出毛利率和净利率，看趋势是在变好、变差，还是比较稳定。对照上面巴菲特的三条标准，看看晶方科技达标了几条。</p>
+    <p style="margin-bottom:0">算完把三年的数字发给我，我们一起看看当初"利润率高"这个判断站不站得住脚。</p>
+  </div>
+
+  <h2>3. 检验一下</h2>
+
+  <div class="quiz-q">
+    <div class="prompt">Q1. 毛利率的计算公式是？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">毛利润 ÷ 营业收入</button>
+      <button class="quiz-option" data-correct="false">净利润 ÷ 营业收入</button>
+      <button class="quiz-option" data-correct="false">营业成本 ÷ 营业收入</button>
+      <button class="quiz-option" data-correct="false">净利润 ÷ 营业成本</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 毛利率看的是扣除直接成本后还剩多少。" data-incorrect-text="再想想：毛利率关心的是'毛利'这一层，不是净利润。"></div>
+  </div>
+
+  <div class="quiz-q">
+    <div class="prompt">Q2. 巴菲特认为，有较强定价权/护城河的公司，毛利率大概应该在多少以上？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">40%以上</button>
+      <button class="quiz-option" data-correct="false">10%以上</button>
+      <button class="quiz-option" data-correct="false">90%以上</button>
+      <button class="quiz-option" data-correct="false">5%以下</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 这是书中给出的常见筛选门槛。" data-incorrect-text="再想想：门槛既不能低到没意义，也不能高到脱离现实。"></div>
+  </div>
+
+  <div class="quiz-q">
+    <div class="prompt">Q3. 判断毛利率是否说明有护城河，除了看数值高低，还应该看什么？</div>
+    <div class="quiz-options">
+      <button class="quiz-option" data-correct="true">是否连续多年保持稳定</button>
+      <button class="quiz-option" data-correct="false">是否今天股价持续上涨</button>
+      <button class="quiz-option" data-correct="false">是否属于当下热门赛道</button>
+      <button class="quiz-option" data-correct="false">是否有很多分析师推荐</button>
+    </div>
+    <div class="quiz-feedback" data-correct-text="对 —— 一年高可能是运气，连续多年高才说明有护城河。" data-incorrect-text="再想想：单独一年的高毛利率能说明什么、不能说明什么？"></div>
+  </div>
+
+  <h2>4. 推荐阅读</h2>
+  <div class="callout source">
+    <div class="label">主要来源</div>
+    <p style="margin-bottom:0">[1] <a href="https://book.douban.com/subject/3591151/">《巴菲特教你读财报》</a>——玛丽·巴菲特 & 戴维·克拉克，这一课的三条标准均来自此书对利润表的拆解。</p>
+  </div>
+
+  <div class="ask-agent">
+    <span class="label">随时提问：</span> 查财报时如果找不到某个数字在哪一行，或者不确定某项费用该不该算进去，随时问我。算完晶方科技三年的数字后发给我，我们一起看结论。
+  </div>
+
+  <div class="nav-footer">
+    <span>← <a href="0005-position-sizing.html">课程 0005</a> · 参考：<a href="../reference/0006-income-statement.html">利润表速查卡</a></span>
+    <span>下一课：待定 —— 取决于你的反馈</span>
+  </div>
+</div>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
