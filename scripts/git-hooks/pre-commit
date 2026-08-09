@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# OpenCodeReview pre-commit hook：对本次待提交改动做一次 AI review，仅提示不阻断提交。
+# OpenCodeReview pre-commit hook：对当前工作区改动（staged+unstaged+untracked，
+# 因为 ocr review 默认就是这个范围）做一次 AI review，仅提示不阻断提交。
 # 跳过方式：SKIP_OCR_REVIEW=1 git commit ... 或 git commit --no-verify
 
 set -uo pipefail
@@ -16,18 +17,25 @@ fi
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 
-if git -C "$REPO_ROOT" diff --cached --quiet; then
-  echo "[ocr] 没有已暂存的改动，跳过 review"
+NO_STAGED=1; git -C "$REPO_ROOT" diff --cached --quiet || NO_STAGED=0
+NO_UNSTAGED=1; git -C "$REPO_ROOT" diff --quiet || NO_UNSTAGED=0
+NO_UNTRACKED=1; [ -n "$(git -C "$REPO_ROOT" ls-files --others --exclude-standard | head -n 1)" ] && NO_UNTRACKED=0
+
+if [ "$NO_STAGED" = "1" ] && [ "$NO_UNSTAGED" = "1" ] && [ "$NO_UNTRACKED" = "1" ]; then
+  echo "[ocr] 工作区没有改动，跳过 review"
   exit 0
 fi
 
-echo "[ocr] 正在对本次改动做 AI code review（不会阻断提交，仅供参考）..."
+echo "[ocr] 正在对当前工作区改动做 AI code review（不会阻断提交，仅供参考）..."
 
-ocr review \
+if ocr review \
   --audience agent \
   --repo "$REPO_ROOT" \
   --background "git pre-commit hook 自动触发的 review" \
-  --timeout 5
+  --timeout 5; then
+  echo "[ocr] review 结束。如需跳过：SKIP_OCR_REVIEW=1 git commit ... 或 git commit --no-verify"
+else
+  echo "[ocr] review 执行失败（exit=$?），请用 'ocr llm test' 排查配置。此错误不会阻断提交。" >&2
+fi
 
-echo "[ocr] review 结束。如需跳过：SKIP_OCR_REVIEW=1 git commit ... 或 git commit --no-verify"
 exit 0
