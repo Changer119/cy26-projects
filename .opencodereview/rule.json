@@ -1,0 +1,27 @@
+{
+  "rules": [
+    {
+      "path": "**/*.py",
+      "rule": "所有函数参数与返回值必须有类型注解；核心数据结构禁止使用未经结构化定义的裸 dict；调用大模型的代码必须用 openai SDK 以 OpenAI 兼容格式调用 DeepSeek，且 DEEPSEEK_API_KEY / DEEPSEEK_BASE_URL / DEEPSEEK_MODEL 必须来自环境变量，不允许硬编码；单文件建议不超过 300 行",
+      "merge_system_rule": true
+    },
+    {
+      "path": "**/*.{ts,tsx,js,jsx}",
+      "rule": "禁止使用 CommonJS（require/module.exports），一律用 ESM；禁止硬编码 API Key/Secret/Token；核心数据结构禁止使用 any 或未经结构化定义的裸 json 对象；调用大模型的代码必须用 openai npm 包以 OpenAI 兼容格式调用 DeepSeek，配置从环境变量读取；单文件建议不超过 300 行",
+      "merge_system_rule": true
+    },
+    {
+      "path": "**/*.{go,java,rs}",
+      "rule": "单文件建议不超过 400 行，超出需考虑拆分",
+      "merge_system_rule": true
+    },
+    {
+      "path": "**/*.sh",
+      "rule": "Run & Debug 脚本应统一放在各子项目的 scripts/ 目录下；脚本失败时应有清晰的错误输出，不应静默吞掉错误"
+    },
+    {
+      "path": "**/.env*",
+      "rule": "检查 diff 中是否混入了真实密钥、Token 等敏感信息，一旦发现应作为 High 优先级问题报告"
+    }
+  ]
+}

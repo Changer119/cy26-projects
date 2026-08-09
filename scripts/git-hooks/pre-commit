@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# OpenCodeReview pre-commit hook：对本次待提交改动做一次 AI review，仅提示不阻断提交。
+# 跳过方式：SKIP_OCR_REVIEW=1 git commit ... 或 git commit --no-verify
+
+set -uo pipefail
+
+if [ "${SKIP_OCR_REVIEW:-0}" = "1" ]; then
+  echo "[ocr] SKIP_OCR_REVIEW=1，跳过 pre-commit review"
+  exit 0
+fi
+
+if ! command -v ocr >/dev/null 2>&1; then
+  echo "[ocr] 未安装 ocr CLI，跳过 review（npm install -g @alibaba-group/open-code-review 可安装）"
+  exit 0
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+if git -C "$REPO_ROOT" diff --cached --quiet; then
+  echo "[ocr] 没有已暂存的改动，跳过 review"
+  exit 0
+fi
+
+echo "[ocr] 正在对本次改动做 AI code review（不会阻断提交，仅供参考）..."
+
+ocr review \
+  --audience agent \
+  --repo "$REPO_ROOT" \
+  --background "git pre-commit hook 自动触发的 review" \
+  --timeout 5
+
+echo "[ocr] review 结束。如需跳过：SKIP_OCR_REVIEW=1 git commit ... 或 git commit --no-verify"
+exit 0
