@@ -14,7 +14,7 @@
 ## 本地运行
 
 ```bash
-./06-github-action-demo/scripts/test.sh
+./scripts/test.sh
 ```
 
 ## GitHub Actions 示例
