@@ -57,6 +57,29 @@ def data_health_response(
     account_initialized: bool,
 ) -> DataHealthResponse:
     database_item = _database_health(database_initialized, account_initialized)
+    if settings.market_data_mode == "akshare_tushare":
+        with session_factory() as session:
+            bars = tuple(session.scalars(select(MarketBarRow))) if database_initialized else ()
+            runs = tuple(session.scalars(select(WorkflowRunRow))) if database_initialized else ()
+        items = _market_health(bars)
+        for name in ("AKShare", "Tushare"):
+            if any(item.provider == name for item in items):
+                continue
+            configured = name == "AKShare" or bool(
+                settings.tushare_token and settings.tushare_token.get_secret_value().strip()
+            )
+            items += (
+                DataHealthItem(
+                    provider=name,
+                    status="unavailable",
+                    latency_ms=None,
+                    last_success_at=None,
+                    message=(
+                        "尚无持久化行情观测" if configured else "未配置 TUSHARE_TOKEN，备用源不可用"
+                    ),
+                ),
+            )
+        return DataHealthResponse(items=(database_item, *items, *_workflow_health(runs)))
     if not database_initialized:
         return DataHealthResponse(
             items=(database_item, _unavailable_yahoo(), _tiingo_health(settings))
@@ -157,6 +180,10 @@ def _workflow_status(value: str) -> HealthStatus:
 
 def _provider_name(source: str) -> str:
     normalized = source.strip().lower()
+    if normalized == "akshare":
+        return "AKShare"
+    if normalized == "tushare":
+        return "Tushare"
     if "yahoo" in normalized:
         return "Yahoo Finance"
     if "tiingo" in normalized:

@@ -177,6 +177,7 @@ async def test_performance_and_data_health_do_not_invent_observations(
     populated_settings: Settings,
 ) -> None:
     populated_settings.tiingo_api_key = SecretStr("")
+    populated_settings.market_data_mode = "yahoo_tiingo"
     app = create_app(populated_settings)
 
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:

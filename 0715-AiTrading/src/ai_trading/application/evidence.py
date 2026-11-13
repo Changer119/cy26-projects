@@ -52,7 +52,7 @@ class DualSourceEvidenceLoader:
         self,
         store: ApplicationStore,
         yahoo: HistoricalMarketProvider,
-        tiingo: HistoricalMarketProvider,
+        tiingo: HistoricalMarketProvider | None,
         quality_gate: MarketDataQualityGate,
     ) -> None:
         self._store = store
@@ -76,12 +76,7 @@ class DualSourceEvidenceLoader:
                 unavailable += (instrument.instrument_id,)
             else:
                 qualified += (evidence,)
-        if not qualified:
-            reason = "DUAL_SOURCE_DATA_UNAVAILABLE"
-        elif unavailable:
-            reason = "PARTIAL_DATA"
-        else:
-            reason = "DUAL_SOURCE_DATA_VALID"
+        reason = self._batch_reason(bool(qualified), bool(unavailable))
         return EvidenceBatch(
             trade_date=trade_date,
             qualified=qualified,
@@ -102,12 +97,7 @@ class DualSourceEvidenceLoader:
                 market, feature = result
                 qualified += (market,)
                 features += (feature,)
-        if not qualified:
-            reason = "DUAL_SOURCE_DATA_UNAVAILABLE"
-        elif unavailable:
-            reason = "PARTIAL_DATA"
-        else:
-            reason = "DUAL_SOURCE_DATA_VALID"
+        reason = self._batch_reason(bool(qualified), bool(unavailable))
         return EvidenceBatch(
             trade_date=trade_date,
             qualified=qualified,
@@ -115,6 +105,12 @@ class DualSourceEvidenceLoader:
             unavailable_instrument_ids=unavailable,
             reason=reason,
         )
+
+    def _batch_reason(self, qualified: bool, unavailable: bool) -> str:
+        prefix = "MARKET_DATA" if self._tiingo is None else "DUAL_SOURCE_DATA"
+        if not qualified:
+            return f"{prefix}_UNAVAILABLE"
+        return "PARTIAL_DATA" if unavailable else f"{prefix}_VALID"
 
     def _load_strategy_one(
         self,
@@ -141,7 +137,7 @@ class DualSourceEvidenceLoader:
         )
         try:
             primary = self._yahoo.fetch_range(yahoo_request)
-            secondary = self._tiingo.fetch_range(tiingo_request)
+            secondary = () if self._tiingo is None else self._tiingo.fetch_range(tiingo_request)
         except MarketDataProviderError as exc:
             logger.warning(
                 "V2 历史行情源失败 instrument=%s kind=%s",
@@ -189,6 +185,7 @@ class DualSourceEvidenceLoader:
                 fx_to_cny=Decimal(1),
                 current_quantity=self._store.quantity(instrument.instrument_id),
                 evidence_date=evidence_date,
+                source=latest.source if self._tiingo is None else "dual_source_canonical",
             ),
             feature,
         )
@@ -198,6 +195,8 @@ class DualSourceEvidenceLoader:
         primary: tuple[MarketBar, ...],
         secondary: tuple[MarketBar, ...],
     ) -> tuple[MarketBar, ...]:
+        if self._tiingo is None:
+            return primary
         dates = sorted(
             {item.trade_date for item in primary} | {item.trade_date for item in secondary}
         )
@@ -248,33 +247,30 @@ class DualSourceEvidenceLoader:
         try:
             primary = self._yahoo.fetch(request)
         except MarketDataProviderError as exc:
-            cause = exc.__cause__
-            logger.warning(
-                "行情源失败 provider=yahoo instrument=%s kind=%s cause=%s detail=%s",
-                instrument.instrument_id,
-                exc.kind.value,
-                "none" if cause is None else type(cause).__name__,
-                "none" if cause is None else str(cause)[:200],
-            )
+            logger.warning("行情源失败 instrument=%s kind=%s", instrument.instrument_id, exc.kind)
             return None
+        if self._tiingo is None:
+            return self._to_evidence(instrument, primary, evidence_date)
         try:
             secondary = self._tiingo.fetch(tiingo_request)
         except MarketDataProviderError as exc:
             logger.warning(
                 "行情源失败 provider=tiingo instrument=%s kind=%s",
                 instrument.instrument_id,
-                exc.kind.value,
+                exc.kind,
             )
             return None
         quality = self._quality_gate.validate(primary, secondary)
         if quality.status is not MarketDataStatus.VALID or quality.canonical is None:
             logger.warning(
-                "行情质量门拒绝 instrument=%s reason=%s",
-                instrument.instrument_id,
-                quality.reason,
+                "行情质量门拒绝 instrument=%s reason=%s", instrument.instrument_id, quality.reason
             )
             return None
-        bar = quality.canonical
+        return self._to_evidence(instrument, quality.canonical, evidence_date)
+
+    def _to_evidence(
+        self, instrument: Instrument, bar: MarketBar, evidence_date: date
+    ) -> QualifiedMarketEvidence:
         return QualifiedMarketEvidence(
             instrument_id=instrument.instrument_id,
             open=bar.open,
@@ -285,6 +281,7 @@ class DualSourceEvidenceLoader:
             fx_to_cny=Decimal(1),
             current_quantity=self._store.quantity(instrument.instrument_id),
             evidence_date=evidence_date,
+            source=bar.source if self._tiingo is None else "dual_source_canonical",
         )
 
     @staticmethod

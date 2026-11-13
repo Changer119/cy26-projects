@@ -18,6 +18,7 @@ def database_environment(tmp_path: Path) -> Mapping[str, str]:
         "AI_TRADING_DATABASE_URL": f"sqlite+pysqlite:///{tmp_path / 'cli.db'}",
         "DEEPSEEK_API_KEY": "",
         "TIINGO_API_KEY": "",
+        "AI_TRADING_MARKET_DATA_MODE": "yahoo_tiingo",
     }
 
 

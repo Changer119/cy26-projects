@@ -8,11 +8,13 @@ version = "0.1.0"
 description = "A 股与港股 AI 模拟交易系统"
 requires-python = ">=3.12"
 dependencies = [
+  "akshare>=1.18,<2",
   "alembic>=1.16,<2",
   "apscheduler==3.11.3",
   "exchange-calendars==4.13.2",
   "fastapi>=0.116,<1",
   "httpx>=0.28,<1",
+  "mcp>=2.3,<3",
   "pydantic>=2.12,<3",
   "pydantic-settings>=2.10,<3",
   "sqlalchemy>=2.0.43,<3",
@@ -26,6 +28,8 @@ ai-trading = "ai_trading.cli:app"
 
 [dependency-groups]
 dev = [
+  "tomlkit>=0.13,<1",
+  "ruamel-yaml>=0.18,<1",
   "mypy>=1.17,<2",
   "pytest>=8.4,<9",
   "pytest-asyncio>=1.1,<2",

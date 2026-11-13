@@ -76,6 +76,7 @@ class QualifiedMarketEvidence(ApplicationModel):
     fx_to_cny: Decimal = Field(gt=Decimal(0))
     current_quantity: int = Field(default=0, ge=0)
     evidence_date: date | None = None
+    source: str = Field(default="dual_source_canonical", min_length=1)
 
     @model_validator(mode="after")
     def validate_ohlc(self) -> Self:

@@ -22,7 +22,7 @@ cd "${PROJECT_ROOT}"
       echo "错误：目录直接文件超过 8 个：${directory} (${files})" >&2
       exit 1
     fi
-  done < <(find src tests scripts web/src -type d)
+  done < <(find src tests scripts web/src -type d -name __pycache__ -prune -o -type d -print)
   plutil -lint deploy/launchd/com.local.ai-trading.plist.template
   uv run ruff format --check src tests
   uv run ruff check src tests

@@ -92,6 +92,8 @@ def configure_from_env_command(
         LocalSecrets(
             deepseek_api_key=settings.deepseek_api_key,
             tiingo_api_key=settings.tiingo_api_key or SecretStr(""),
+            tushare_token=settings.tushare_token or SecretStr(""),
+            market_data_mode=settings.market_data_mode,
             feishu_target_type=settings.feishu_target_type,
             feishu_target_id=settings.feishu_target_id,
         ),

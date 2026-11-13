@@ -14,6 +14,9 @@ from ai_trading.application.store import ApplicationStore
 from ai_trading.application.workflows import TradingApplication
 from ai_trading.config import Settings
 from ai_trading.domain import Currency
+from ai_trading.integrations.china.akshare import AkshareEodProvider
+from ai_trading.integrations.china.failover import FailoverMarketProvider
+from ai_trading.integrations.china.tushare import TushareEodProvider
 from ai_trading.integrations.deepseek import DeepSeekClient
 from ai_trading.integrations.market_data import MarketDataQualityGate
 from ai_trading.integrations.tiingo import TiingoEodProvider
@@ -67,6 +70,19 @@ def _build_evidence_loader(
     store: ApplicationStore,
     client: httpx.Client,
 ) -> UnavailableEvidenceLoader | DualSourceEvidenceLoader:
+    if settings.market_data_mode == "akshare_tushare":
+        provider = FailoverMarketProvider(
+            (
+                AkshareEodProvider(),
+                TushareEodProvider(settings.tushare_token, client),
+            )
+        )
+        return DualSourceEvidenceLoader(
+            store=store,
+            yahoo=provider,
+            tiingo=None,
+            quality_gate=MarketDataQualityGate(Decimal("100")),
+        )
     token = settings.tiingo_api_key
     evidence_loader: UnavailableEvidenceLoader | DualSourceEvidenceLoader
     if token is None or not token.get_secret_value().strip():

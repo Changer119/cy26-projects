@@ -251,14 +251,14 @@ class PostmarketService:
         available_at = datetime.combine(trade_date, time(18), ZoneInfo("Asia/Shanghai"))
         with self._store.session() as session, session.begin():
             for item in evidence:
-                key = (item.instrument_id, trade_date, "dual_source_canonical")
+                key = (item.instrument_id, trade_date, item.source)
                 if session.get(MarketBarRow, key) is not None:
                     continue
                 session.add(
                     MarketBarRow(
                         instrument_id=item.instrument_id,
                         trade_date=trade_date,
-                        source="dual_source_canonical",
+                        source=item.source,
                         currency=Currency.CNY,
                         open_micros=decimal_to_micros(item.open),
                         high_micros=decimal_to_micros(item.high),

@@ -42,3 +42,25 @@ def test_settings_accept_feishu_runtime_environment(
     assert settings.feishu_target_id is not None
     assert settings.feishu_target_id.get_secret_value() == "oc_test_target"
     assert "oc_test_target" not in repr(settings)
+
+
+def test_settings_accept_tushare_api_key_alias(monkeypatch: MonkeyPatch) -> None:
+    monkeypatch.delenv("TUSHARE_TOKEN", raising=False)
+    monkeypatch.setenv("TUSHARE_API_KEY", "tushare-private-value")
+    settings = Settings(_env_file=None)
+    assert settings.tushare_token is not None
+    assert settings.tushare_token.get_secret_value() == "tushare-private-value"
+    assert "tushare-private-value" not in repr(settings)
+
+
+def test_tushare_environment_alias_overrides_saved_token(
+    monkeypatch: MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    monkeypatch.delenv("TUSHARE_TOKEN", raising=False)
+    monkeypatch.setenv("TUSHARE_API_KEY", "current-key")
+    dotenv = tmp_path / ".env"
+    dotenv.write_text("TUSHARE_TOKEN=old-key\n", encoding="utf-8")
+    settings = Settings(_env_file=dotenv)
+    assert settings.tushare_token is not None
+    assert settings.tushare_token.get_secret_value() == "current-key"
